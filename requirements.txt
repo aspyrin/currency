@@ -1,0 +1,7 @@
+Django==4.0.6
+
+# flake8
+flake8==4.0.1
+flake8-debugger==4.1.2
+flake8-print==5.0.0
+flake8-builtins==1.5.3
