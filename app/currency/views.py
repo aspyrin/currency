@@ -15,9 +15,8 @@ def rate_generator(request):
     link to rate_list
     """
     rates_gen()
-    result = f'''Выполнена генерация и добавление в модель Rate 100 записей <br>
-                <a href="/rate_list/">Перейти к списку >>></a>
-                '''
+    result = '''Выполнена генерация и добавление в модель Rate 100 записей<br>
+                <a href="/rate_list/">Перейти к списку >>></a>'''
     return HttpResponse(result)
 
 
@@ -31,11 +30,11 @@ def rate_list(request):
     """
     rates_list = []
     for rate in Rate.objects.all():
-        html_string = f'''ID: {rate.id}, 
-                            bc_type: '{rate.base_currency_type}', 
-                            c_type: '{rate.currency_type}', 
-                            sale: {rate.sale}, 
-                            buy: {rate.buy}, 
+        html_string = f'''ID: {rate.id},
+                            bc_type: '{rate.base_currency_type}',
+                            c_type: '{rate.currency_type}',
+                            sale: {rate.sale},
+                            buy: {rate.buy},
                             source: '{rate.source}',
                             created: '{rate.created.strftime("%x %X")}'<br>'''
         html_string = html_string.replace("\n ", "")
@@ -53,9 +52,8 @@ def contactus_generator(request):
     link to rate_list
     """
     contactus_gen()
-    result = f'''Выполнена генерация и добавление в модель ContactUs 100 записей <br>
-                <a href="/contactus_list/">Перейти к списку >>></a>
-                '''
+    result = '''Выполнена генерация и добавление в модель ContactUs 100 записей <br>
+                <a href="/contactus_list/">Перейти к списку >>></a>'''
     return HttpResponse(result)
 
 
@@ -69,11 +67,11 @@ def contactus_list(request):
     """
     contactus_list = []
     for contactus in ContactUs.objects.all():
-        html_string = f'''ID: {contactus.id}, 
-                            email_from: '{contactus.email_from}', 
-                            email_to: '{contactus.email_to}', 
-                            subject: '{contactus.subject}', 
-                            message: ({contactus.message}), 
+        html_string = f'''ID: {contactus.id},
+                            email_from: '{contactus.email_from}',
+                            email_to: '{contactus.email_to}',
+                            subject: '{contactus.subject}',
+                            message: ({contactus.message}),
                             sended: '{contactus.sended.strftime("%x %X")}'<br>'''
         html_string = html_string.replace("\n ", "")
         contactus_list.append(html_string)

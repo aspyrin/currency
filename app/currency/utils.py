@@ -48,10 +48,10 @@ def contactus_gen():
     for rate in Rate.objects.all():
         random.shuffle(emails_list)
         subject = f'Current exchange rate on date {rate.created.strftime("%x %X")}'
-        message = f'''base_currency_type: {rate.base_currency_type}, 
-                        currency_type: {rate.currency_type}, 
-                        sale: {str(rate.sale)}, 
-                        buy: {str(rate.buy)}, 
+        message = f'''base_currency_type: {rate.base_currency_type},
+                        currency_type: {rate.currency_type},
+                        sale: {str(rate.sale)},
+                        buy: {str(rate.buy)},
                         source: {rate.source}'''
 
         ContactUs.objects.create(email_from='curency@gmail.com',
