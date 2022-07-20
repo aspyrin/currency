@@ -14,5 +14,5 @@ class ContactUs(models.Model):
     email_from = models.EmailField(max_length=30)
     email_to = models.EmailField(max_length=30)
     subject = models.CharField(max_length=100)
-    message = models.TextField()
+    message = models.CharField(max_length=3000)
     sended = models.DateTimeField(auto_now_add=True)
