@@ -1,8 +1,20 @@
-# from django.shortcuts import render
-
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from currency.models import Rate, ContactUs
 from currency.utils import rates_gen, contactus_gen
+
+
+def index(request):
+    """
+    :param
+    none
+    :return:
+    link to home page
+    """
+    context = {
+        'title': 'Home page',
+        'message': 'Currency exchange project',
+    }
+    return render(request, 'index.html', context=context)
 
 
 def rate_generator(request):
@@ -15,9 +27,7 @@ def rate_generator(request):
     link to rate_list
     """
     rates_gen()
-    result = '''Выполнена генерация и добавление в модель Rate 100 записей<br>
-                <a href="/rate_list/">Перейти к списку >>></a>'''
-    return HttpResponse(result)
+    return redirect('/rate_list/')
 
 
 def rate_list(request):
@@ -28,18 +38,11 @@ def rate_list(request):
     :return:
     all records of Rate model
     """
-    rates_list = []
-    for rate in Rate.objects.all():
-        html_string = f'''ID: {rate.id},
-                            bc_type: '{rate.base_currency_type}',
-                            c_type: '{rate.currency_type}',
-                            sale: {rate.sale},
-                            buy: {rate.buy},
-                            source: '{rate.source}',
-                            created: '{rate.created.strftime("%x %X")}'<br>'''
-        html_string = html_string.replace("\n ", "")
-        rates_list.append(html_string)
-    return HttpResponse(str(rates_list))
+    context = {
+        'title': 'Rate list',
+        'rate_list': Rate.objects.all(),
+    }
+    return render(request, 'rate_list.html', context=context)
 
 
 def contactus_generator(request):
@@ -52,9 +55,7 @@ def contactus_generator(request):
     link to rate_list
     """
     contactus_gen()
-    result = '''Выполнена генерация и добавление в модель ContactUs 100 записей <br>
-                <a href="/contactus_list/">Перейти к списку >>></a>'''
-    return HttpResponse(result)
+    return redirect('/contactus_list/')
 
 
 def contactus_list(request):
@@ -65,14 +66,8 @@ def contactus_list(request):
     :return:
     all records of model ContactUs
     """
-    contactus_list = []
-    for contactus in ContactUs.objects.all():
-        html_string = f'''ID: {contactus.id},
-                            email_from: '{contactus.email_from}',
-                            email_to: '{contactus.email_to}',
-                            subject: '{contactus.subject}',
-                            message: ({contactus.message}),
-                            sended: '{contactus.sended.strftime("%x %X")}'<br>'''
-        html_string = html_string.replace("\n ", "")
-        contactus_list.append(html_string)
-    return HttpResponse(str(contactus_list))
+    context = {
+        'title': 'Contact Us list',
+        'contactus_list': ContactUs.objects.all(),
+    }
+    return render(request, 'contactus_list.html', context=context)

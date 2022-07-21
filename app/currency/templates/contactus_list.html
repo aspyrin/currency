@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    {% if contactus_list %}
+        <table>
+        <caption>
+            <strong>Список отправленных писем (всего: {{ contactus_list.count }} записей)</strong>
+        </caption>
+          <tr>
+              <th>Id</th>
+              <th>base_currency_type</th>
+              <th>currency_type</th>
+              <th>sale</th>
+              <th>buy</th>
+              <th>source</th>
+              <th>created</th>
+              <th colspan="2">Links</th>
+          </tr>
+          {% for contactus in contactus_list %}
+          <tr>
+              <td style="text-align: center;">{{ contactus.id }}</td>
+              <td style="text-align: center;">{{ contactus.email_from }}</td>
+              <td style="text-align: center;">{{ contactus.email_to }}</td>
+              <td style="text-align: center;">{{ contactus.subject }}</td>
+              <td style="text-align: center;">{{ contactus.message }}</td>
+              <td style="text-align: center;">{{ contactus.sended|date:'Y-m-d H:i' }}</td>
+              <td style="text-align: center;">
+                  <a href="#">Edit</a>
+              </td>
+              <td style="text-align: center;">
+                  <a href="#">Delete</a>
+              </td>
+          </tr>
+          {% endfor %}
+        </table>
+
+    {% else %}
+        <p>contactus_list пуст, нет записей для вывода!</p>p>
+
+    {% endif %}
+{% endblock main_content %}
