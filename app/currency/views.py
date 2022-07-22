@@ -52,7 +52,7 @@ def contactus_generator(request):
     :param
     none
     :return:
-    link to rate_list
+    link to contactus_list
     """
     contactus_gen()
     return redirect('/contactus_list/')
