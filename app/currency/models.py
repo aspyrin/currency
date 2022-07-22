@@ -1,6 +1,11 @@
 from django.db import models
 
 
+class Source(models.Model):
+    source_url = models.CharField(max_length=255)
+    name = models.CharField(max_length=64)
+
+
 class Rate(models.Model):
     base_currency_type = models.CharField(max_length=3)
     currency_type = models.CharField(max_length=3)
