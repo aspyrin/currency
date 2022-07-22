@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        th {
+            text-align: center;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #D6EEEE;
+        }
+        tr:hover {background-color: #A9D0F5;}
+
+        a.home, a.rate_list, a.contactus_list, a.rate_generator, a.contactus_generator {
+            margin: 5px;
+            padding: 5px 5px;
+            display: inline-block;
+            border: 1px solid #900000;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+{# NAVBAR #}
+<div>
+    <a class="home" href="/">Home</a>
+    <a class="rate_list" href="/rate_list/">rate_list</a>
+    <a class="contactus_list" href="/contactus_list/">contactus_list</a>
+    <a class="rate_generator" href="/rate_generator/">rate_generator</a>
+    <a class="contactus_generator" href="/contactus_generator">contactus_generator</a>
+</div>
+{# NAVBAR #}
+
+{% block main_content %}
+{% endblock main_content %}
+
+</body>
+</html>
