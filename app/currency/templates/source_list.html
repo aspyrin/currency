@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    <a class="custom_button" href="/source_create/">Create Source</a>
+    {% if source_list %}
+        <table>
+        <caption>
+            <strong>Список источников (всего: {{ source_list.count }} записей)</strong>
+        </caption>
+          <tr>
+              <th>Id</th>
+              <th>source_url</th>
+              <th>name</th>
+              <th colspan="3">Links</th>
+          </tr>
+          {% for source in source_list %}
+          <tr>
+              <td style="text-align: center;">{{ source.id }}</td>
+              <td style="text-align: center;">{{ source.source_url }}</td>
+              <td style="text-align: center;">{{ source.name }}</td>
+              <td style="text-align: center;">
+                  <a href="/source_details/{{ source.id }}">Details</a>
+              </td>
+              <td style="text-align: center;">
+                  <a href="/source_update/{{ source.id }}">Edit</a>
+              </td>
+              <td style="text-align: center;">
+                  <a href="/source_delete/{{ source.id }}">Delete</a>
+              </td>
+          </tr>
+          {% endfor %}
+        </table>
+
+    {% else %}
+        <p>source_list пуст, нет записей для вывода!</p>
+
+    {% endif %}
+{% endblock main_content %}

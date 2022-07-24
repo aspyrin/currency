@@ -20,23 +20,56 @@
         }
         tr:hover {background-color: #A9D0F5;}
 
-        a.home, a.rate_list, a.contactus_list, a.rate_generator, a.contactus_generator {
+        a.custom_button {
             margin: 5px;
             padding: 5px 5px;
             display: inline-block;
             border: 1px solid #900000;
             box-sizing: border-box;
         }
+        a.custom_button:hover {background-color: #A9D0F5;}
+
+        a.custom_button_selected {
+            margin: 5px;
+            padding: 5px 5px;
+            display: inline-block;
+            border: 1px solid #900000;
+            box-sizing: border-box;
+            background-color: #c4dce8;
+        }
+        a.custom_button_selected:hover {background-color: #A9D0F5;}
+
     </style>
 </head>
 <body>
 {# NAVBAR #}
 <div>
-    <a class="home" href="/">Home</a>
-    <a class="rate_list" href="/rate_list/">rate_list</a>
-    <a class="contactus_list" href="/contactus_list/">contactus_list</a>
-    <a class="rate_generator" href="/rate_generator/">rate_generator</a>
-    <a class="contactus_generator" href="/contactus_generator">contactus_generator</a>
+    {% if request.path == '/' %}
+    <a class="custom_button_selected" href="/">Home</a>
+    {% else %}
+    <a class="custom_button" href="/">Home</a>
+    {% endif %}
+
+    {% if request.path == '/rate_list/' %}
+    <a class="custom_button_selected" href="/rate_list/">rate_list</a>
+    {% else %}
+    <a class="custom_button" href="/rate_list/">rate_list</a>
+    {% endif %}
+
+    {% if request.path == '/source_list/' %}
+    <a class="custom_button_selected" href="/source_list/">source_list</a>
+    {% else %}
+    <a class="custom_button" href="/source_list/">source_list</a>
+    {% endif %}
+
+    {% if request.path == '/contactus_list/' %}
+    <a class="custom_button_selected" href="/contactus_list/">contactus_list</a>
+    {% else %}
+    <a class="custom_button" href="/contactus_list/">contactus_list</a>
+    {% endif %}
+
+    <a class="custom_button" href="/rate_generator/">rate_generator</a>
+    <a class="custom_button" href="/contactus_generator">contactus_generator</a>
 </div>
 {# NAVBAR #}
 

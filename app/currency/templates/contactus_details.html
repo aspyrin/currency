@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    {% if instance %}
+        <table>
+        <caption>
+            <strong>{{ title }} id={{ instance.id }}</strong>
+        </caption>
+          <tr>
+              <th>Property</th>
+              <th>Value</th>
+          </tr>
+          <tr>
+              <td style="text-align: left;">email_from</td>
+              <td style="text-align: center;">{{ instance.email_from }}</td>
+          </tr>
+          <tr>
+              <td style="text-align: left;">email_to</td>
+              <td style="text-align: center;">{{ instance.email_to }}</td>
+          </tr>
+          <tr>
+              <td style="text-align: left;">subject</td>
+              <td style="text-align: center;">{{ instance.subject }}</td>
+          </tr>
+          <tr>
+              <td style="text-align: left;">message</td>
+              <td style="text-align: center;">{{ instance.message }}</td>
+          </tr>
+          <tr>
+              <td style="text-align: left;">sended</td>
+              <td style="text-align: center;">{{ instance.sended|date:'Y-m-d H:i' }}</td>
+          </tr>
+        </table>
+
+        <div>
+            <a class="custom_button" href="/contactus_update/{{ instance.id }}">Edit</a>
+            <a class="custom_button" href="/contactus_delete/{{ instance.id }}">Delete</a>
+        </div>
+
+    {% else %}
+        <p>Объект не найден!</p>p>
+
+    {% endif %}
+{% endblock main_content %}
