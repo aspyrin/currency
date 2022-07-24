@@ -2,9 +2,11 @@ from django.contrib import admin
 from django.urls import path
 
 from currency.views import index
+from currency.views import rate_generator
+from currency.views import contactus_generator
 from currency.views import source_list, source_create, source_update, source_details, source_delete
-from currency.views import rate_generator, rate_list, rate_create, rate_update, rate_details, rate_delete
-from currency.views import contactus_generator, contactus_create, contactus_list, contactus_details, contactus_update, contactus_delete
+from currency.views import rate_list, rate_create, rate_update, rate_details, rate_delete
+from currency.views import contactus_create, contactus_list, contactus_details, contactus_update, contactus_delete
 
 
 urlpatterns = [
