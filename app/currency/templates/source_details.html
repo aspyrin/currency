@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    {% if instance %}
+        <table>
+        <caption>
+            <strong>{{ title }} id={{ instance.id }}</strong>
+        </caption>
+          <tr>
+              <th>Property</th>
+              <th>Value</th>
+          </tr>
+          <tr>
+              <td style="text-align: left;">source_url</td>
+              <td style="text-align: center;">{{ instance.source_url }}</td>
+          </tr>
+          <tr>
+              <td style="text-align: left;">name</td>
+              <td style="text-align: center;">{{ instance.name }}</td>
+          </tr>
+        </table>
+
+        <div>
+            <a class="custom_button" href="/source_update/{{ instance.id }}">Edit</a>
+            <a class="custom_button" href="/source_delete/{{ instance.id }}">Delete</a>
+        </div>
+
+    {% else %}
+        <p>Объект не найден!</p>p>
+
+    {% endif %}
+{% endblock main_content %}
