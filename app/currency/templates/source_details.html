@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    {% if instance %}
+    {% if object %}
         <table>
         <caption>
-            <strong>{{ title }} id={{ instance.id }}</strong>
+            <strong>{{ title }} id={{ object.id }}</strong>
         </caption>
           <tr>
               <th>Property</th>
@@ -12,17 +12,17 @@
           </tr>
           <tr>
               <td style="text-align: left;">source_url</td>
-              <td style="text-align: center;">{{ instance.source_url }}</td>
+              <td style="text-align: center;">{{ object.source_url }}</td>
           </tr>
           <tr>
               <td style="text-align: left;">name</td>
-              <td style="text-align: center;">{{ instance.name }}</td>
+              <td style="text-align: center;">{{ object.name }}</td>
           </tr>
         </table>
 
         <div>
-            <a class="custom_button" href="/source_update/{{ instance.id }}">Edit</a>
-            <a class="custom_button" href="/source_delete/{{ instance.id }}">Delete</a>
+            <a class="custom_button" href="{% url 'currency:source_update' pk=object.id %}">Edit</a>
+            <a class="custom_button" href="{% url 'currency:source_delete' pk=object.id %}">Delete</a>
         </div>
 
     {% else %}
