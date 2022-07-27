@@ -21,8 +21,8 @@
         </table>
 
         <div>
-            <a class="custom_button" href="{% url 'source_update' pk=object.id %}">Edit</a>
-            <a class="custom_button" href="{% url 'source_delete' pk=object.id %}">Delete</a>
+            <a class="custom_button" href="{% url 'currency:source_update' pk=object.id %}">Edit</a>
+            <a class="custom_button" href="{% url 'currency:source_delete' pk=object.id %}">Delete</a>
         </div>
 
     {% else %}

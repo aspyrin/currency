@@ -33,8 +33,8 @@
         </table>
 
         <div>
-            <a class="custom_button" href="{% url 'contactus_update' pk=object.id %}">Edit</a>
-            <a class="custom_button" href="{% url 'contactus_delete' pk=object.id %}">Delete</a>
+            <a class="custom_button" href="{% url 'currency:contactus_update' pk=object.id %}">Edit</a>
+            <a class="custom_button" href="{% url 'currency:contactus_delete' pk=object.id %}">Delete</a>
         </div>
 
     {% else %}

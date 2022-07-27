@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <a class="custom_button" href="{% url 'rate_create' %}">Create Rate</a>
+    <a class="custom_button" href="{% url 'currency:rate_create' %}">Create Rate</a>
     {% if rate_list %}
         <table>
         <caption>
@@ -27,13 +27,13 @@
               <td style="text-align: center;">{{ rate.source }}</td>
               <td style="text-align: center;">{{ rate.created|date:'Y-m-d H:i' }}</td>
               <td style="text-align: center;">
-                  <a href="{% url 'rate_details' pk=rate.id %}">Details</a>
+                  <a href="{% url 'currency:rate_details' pk=rate.id %}">Details</a>
               </td>
               <td style="text-align: center;">
-                  <a href="{% url 'rate_update' pk=rate.id %}">Edit</a>
+                  <a href="{% url 'currency:rate_update' pk=rate.id %}">Edit</a>
               </td>
               <td style="text-align: center;">
-                  <a href="{% url 'rate_delete' pk=rate.id %}">Delete</a>
+                  <a href="{% url 'currency:rate_delete' pk=rate.id %}">Delete</a>
               </td>
           </tr>
           {% endfor %}

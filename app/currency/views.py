@@ -31,7 +31,7 @@ def rate_generator(request):
     link to rate_list
     """
     utils.rates_gen()
-    return HttpResponseRedirect(reverse('rate_list'))
+    return HttpResponseRedirect(reverse('currency:rate_list'))
 
 
 def contactus_generator(request):
@@ -44,7 +44,7 @@ def contactus_generator(request):
     link to contactus_list
     """
     utils.contactus_gen()
-    return HttpResponseRedirect(reverse('contactus_list'))
+    return HttpResponseRedirect(reverse('currency:contactus_list'))
 
 
 # =================Source==================
@@ -62,7 +62,7 @@ class SourceCreateView(generic.CreateView):
     queryset = Source.objects.all()
     template_name = 'source_create.html'
     form_class = SourceForm
-    success_url = reverse_lazy('source_list')
+    success_url = reverse_lazy('currency:source_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -74,7 +74,7 @@ class SourceUpdateView(generic.UpdateView):
     queryset = Source.objects.all()
     template_name = 'source_update.html'
     form_class = SourceForm
-    success_url = reverse_lazy('source_list')
+    success_url = reverse_lazy('currency:source_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -85,7 +85,7 @@ class SourceUpdateView(generic.UpdateView):
 class SourceDeleteView(generic.DeleteView):
     queryset = Source.objects.all()
     template_name = 'source_delete.html'
-    success_url = reverse_lazy('source_list')
+    success_url = reverse_lazy('currency:source_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -118,7 +118,7 @@ class RateCreateView(generic.CreateView):
     queryset = Rate.objects.all()
     template_name = 'rate_create.html'
     form_class = RateForm
-    success_url = reverse_lazy('rate_list')
+    success_url = reverse_lazy('currency:rate_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -130,7 +130,7 @@ class RateUpdateView(generic.UpdateView):
     queryset = Rate.objects.all()
     template_name = 'rate_update.html'
     form_class = RateForm
-    success_url = reverse_lazy('rate_list')
+    success_url = reverse_lazy('currency:rate_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -141,7 +141,7 @@ class RateUpdateView(generic.UpdateView):
 class RateDeleteView(generic.DeleteView):
     queryset = Rate.objects.all()
     template_name = 'rate_delete.html'
-    success_url = reverse_lazy('rate_list')
+    success_url = reverse_lazy('currency:rate_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -174,7 +174,7 @@ class ContactUsCreateView(generic.CreateView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_create.html'
     form_class = ContactUsForm
-    success_url = reverse_lazy('contactus_list')
+    success_url = reverse_lazy('currency:contactus_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -186,7 +186,7 @@ class ContactUsUpdateView(generic.UpdateView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_update.html'
     form_class = ContactUsForm
-    success_url = reverse_lazy('contactus_list')
+    success_url = reverse_lazy('currency:contactus_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -197,7 +197,7 @@ class ContactUsUpdateView(generic.UpdateView):
 class ContactUsDeleteView(generic.DeleteView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_delete.html'
-    success_url = reverse_lazy('contactus_list')
+    success_url = reverse_lazy('currency:contactus_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

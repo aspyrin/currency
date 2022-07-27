@@ -44,32 +44,32 @@
 <body>
 {# NAVBAR #}
 <div>
-    {% if request.path == '/' %}
-    <a class="custom_button_selected" href="/">Home</a>
+    {% if request.path == '/currency/' %}
+    <a class="custom_button_selected" href="{% url 'currency:index' %}">Home</a>
     {% else %}
-    <a class="custom_button" href="/">Home</a>
+    <a class="custom_button" href="{% url 'currency:index' %}">Home</a>
     {% endif %}
 
-    {% if request.path == '/rate/list/' %}
-    <a class="custom_button_selected" href="{% url 'rate_list' %}">rate_list</a>
+    {% if request.path == '/currency/rate/list/' %}
+    <a class="custom_button_selected" href="{% url 'currency:rate_list' %}">rate_list</a>
     {% else %}
-    <a class="custom_button" href="{% url 'rate_list' %}">rate_list</a>
+    <a class="custom_button" href="{% url 'currency:rate_list' %}">rate_list</a>
     {% endif %}
 
-    {% if request.path == '/source/list/' %}
-    <a class="custom_button_selected" href="{% url 'source_list' %}">source_list</a>
+    {% if request.path == '/currency/source/list/' %}
+    <a class="custom_button_selected" href="{% url 'currency:source_list' %}">source_list</a>
     {% else %}
-    <a class="custom_button" href="{% url 'source_list' %}">source_list</a>
+    <a class="custom_button" href="{% url 'currency:source_list' %}">source_list</a>
     {% endif %}
 
-    {% if request.path == '/contactus/list/' %}
-    <a class="custom_button_selected" href="{% url 'contactus_list' %}">contactus_list</a>
+    {% if request.path == '/currency/contactus/list/' %}
+    <a class="custom_button_selected" href="{% url 'currency:contactus_list' %}">contactus_list</a>
     {% else %}
-    <a class="custom_button" href="{% url 'contactus_list' %}">contactus_list</a>
+    <a class="custom_button" href="{% url 'currency:contactus_list' %}">contactus_list</a>
     {% endif %}
 
-    <a class="custom_button" href="{% url 'rate_generator' %}">rate_generator</a>
-    <a class="custom_button" href="{% url 'contactus_generator' %}">contactus_generator</a>
+    <a class="custom_button" href="{% url 'currency:rate_generator' %}">rate_generator</a>
+    <a class="custom_button" href="{% url 'currency:contactus_generator' %}">contactus_generator</a>
 </div>
 {# NAVBAR #}
 
