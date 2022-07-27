@@ -20,7 +20,7 @@ def rates_gen():
     init_sale = {"USD": 36, "EUR": 37, "GBP": 39, "PLN": 6, "FRF": 5}
 
     date_list = []
-    for i in range(100):
+    for i in range(10):
         create_date = datetime.datetime.date(datetime.datetime.now() + datetime.timedelta(days=-i))
         date_list.append(create_date)
 
