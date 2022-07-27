@@ -1,5 +1,34 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <h1>{{ message }}</h1>
-{% endblock main_content %}
+    <h2>Last update: {{ last_rate_date|date:'Y-m-d H:i' }}.</h2>
+    <div>
+        {% for currency_types in currency_types_list %}
+            <div>
+               <table>
+                <caption>
+                    <strong>{{ currency_types.currency_type }}</strong>
+                </caption>
+                  <tr>
+                      <th>source</th>
+                      <th>sale</th>
+                      <th>buy</th>
+                  </tr>
+                  {% for source in sources_list %}
+                      {% for rate in last_rate_list %}
+                          {% if rate.currency_type == currency_types.currency_type %}
+                              {% if rate.source == source.source %}
+                                  <tr>
+                                      <td style="text-align: center;">{{ rate.source }}</td>
+                                      <td style="text-align: right;">{{ rate.sale }}</td>
+                                      <td style="text-align: right;">{{ rate.buy }}</td>
+                                  </tr>
+                              {% endif %}
+                          {% endif %}
+                      {% endfor %}
+                  {% endfor %}
+                </table>
+            </div><br>
+        {% endfor %}
+    </div>
+ {% endblock main_content %}

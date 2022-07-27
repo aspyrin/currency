@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    {% if instance %}
+    {% if object %}
         <table>
         <caption>
-            <strong>{{ title }} id={{ instance.id }}</strong>
+            <strong>{{ title }} id={{ object.id }}</strong>
         </caption>
           <tr>
               <th>Property</th>
@@ -12,37 +12,37 @@
           </tr>
           <tr>
               <td style="text-align: left;">base_currency_type</td>
-              <td style="text-align: center;">{{ instance.base_currency_type }}</td>
+              <td style="text-align: center;">{{ object.base_currency_type }}</td>
           </tr>
           <tr>
               <td style="text-align: left;">currency_type</td>
-              <td style="text-align: center;">{{ instance.currency_type }}</td>
+              <td style="text-align: center;">{{ object.currency_type }}</td>
           </tr>
           <tr>
               <td style="text-align: left;">sale</td>
-              <td style="text-align: center;">{{ instance.sale }}</td>
+              <td style="text-align: center;">{{ object.sale }}</td>
           </tr>
           <tr>
               <td style="text-align: left;">buy</td>
-              <td style="text-align: center;">{{ instance.buy }}</td>
+              <td style="text-align: center;">{{ object.buy }}</td>
           </tr>
           <tr>
               <td style="text-align: left;">base_currency_type</td>
-              <td style="text-align: center;">{{ instance.base_currency_type }}</td>
+              <td style="text-align: center;">{{ object.base_currency_type }}</td>
           </tr>
           <tr>
               <td style="text-align: left;">source</td>
-              <td style="text-align: center;">{{ instance.source }}</td>
+              <td style="text-align: center;">{{ object.source }}</td>
           </tr>
           <tr>
               <td style="text-align: left;">created</td>
-              <td style="text-align: center;">{{ instance.created|date:'Y-m-d H:i' }}</td>
+              <td style="text-align: center;">{{ object.created|date:'Y-m-d H:i' }}</td>
           </tr>
         </table>
 
         <div>
-            <a class="custom_button" href="/rate_update/{{ instance.id }}">Edit</a>
-            <a class="custom_button" href="/rate_delete/{{ instance.id }}">Delete</a>
+            <a class="custom_button" href="/rate_update/{{ object.id }}">Edit</a>
+            <a class="custom_button" href="/rate_delete/{{ object.id }}">Delete</a>
         </div>
 
     {% else %}
