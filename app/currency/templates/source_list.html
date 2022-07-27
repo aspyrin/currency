@@ -19,13 +19,13 @@
               <td style="text-align: center;">{{ source.source_url }}</td>
               <td style="text-align: center;">{{ source.name }}</td>
               <td style="text-align: center;">
-                  <a href="{% url 'source_details' source.id %}">Details</a>
+                  <a href="{% url 'source_details' pk=source.id %}">Details</a>
               </td>
               <td style="text-align: center;">
-                  <a href="{% url 'source_update' source.id %}">Edit</a>
+                  <a href="{% url 'source_update' pk=source.id %}">Edit</a>
               </td>
               <td style="text-align: center;">
-                  <a href="{% url 'source_delete' source.id %}">Delete</a>
+                  <a href="{% url 'source_delete' pk=source.id %}">Delete</a>
               </td>
           </tr>
           {% endfor %}

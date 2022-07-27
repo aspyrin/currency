@@ -27,13 +27,13 @@
               <td style="text-align: center;">{{ rate.source }}</td>
               <td style="text-align: center;">{{ rate.created|date:'Y-m-d H:i' }}</td>
               <td style="text-align: center;">
-                  <a href="{% url 'rate_details' rate.id %}">Details</a>
+                  <a href="{% url 'rate_details' pk=rate.id %}">Details</a>
               </td>
               <td style="text-align: center;">
-                  <a href="{% url 'rate_update' rate.id %}">Edit</a>
+                  <a href="{% url 'rate_update' pk=rate.id %}">Edit</a>
               </td>
               <td style="text-align: center;">
-                  <a href="{% url 'rate_delete' rate.id %}">Delete</a>
+                  <a href="{% url 'rate_delete' pk=rate.id %}">Delete</a>
               </td>
           </tr>
           {% endfor %}

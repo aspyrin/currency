@@ -26,13 +26,13 @@
               <td style="text-align: center;">{{ contactus.message }}</td>
               <td style="text-align: center;">{{ contactus.sended|date:'Y-m-d H:i' }}</td>
               <td style="text-align: center;">
-                  <a href="{% url 'contactus_details' contactus.id %}">Detail</a>
+                  <a href="{% url 'contactus_details' pk=contactus.id %}">Detail</a>
               </td>
               <td style="text-align: center;">
-                  <a href="{% url 'contactus_update' contactus.id %}">Edit</a>
+                  <a href="{% url 'contactus_update' pk=contactus.id %}">Edit</a>
               </td>
               <td style="text-align: center;">
-                  <a href="{% url 'contactus_delete' contactus.id %}">Delete</a>
+                  <a href="{% url 'contactus_delete' pk=contactus.id %}">Delete</a>
               </td>
           </tr>
           {% endfor %}
