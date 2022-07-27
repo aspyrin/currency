@@ -8,28 +8,28 @@ from currency import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', views.IndexView.as_view()),
+    path('rate/generator/', rate_generator, name='rate_generator'),
+    path('contactus/generator/', contactus_generator, name='contactus_generator'),
 
-    path('rate_generator/', rate_generator),
-    path('contactus_generator/', contactus_generator),
+    path('', views.IndexView.as_view(), name='index'),
 
-    path('source_list/', views.SourceListView.as_view()),
-    path('source_create/', views.SourceCreateView.as_view()),
-    path('source_update/<int:pk>', views.SourceUpdateView.as_view()),
-    path('source_delete/<int:pk>', views.SourceDeleteView.as_view()),
-    path('source_details/<int:pk>', views.SourceDetailsView.as_view()),
+    path('source/list/', views.SourceListView.as_view(), name='source_list'),
+    path('source/create/', views.SourceCreateView.as_view(), name='source_create'),
+    path('source/update/<int:pk>', views.SourceUpdateView.as_view(), name='source_update'),
+    path('source/delete/<int:pk>', views.SourceDeleteView.as_view(), name='source_delete'),
+    path('source/details/<int:pk>', views.SourceDetailsView.as_view(), name='source_details'),
 
-    path('rate_list/', views.RateListView.as_view()),
-    path('rate_create/', views.RateCreateView.as_view()),
-    path('rate_update/<int:pk>', views.RateUpdateView.as_view()),
-    path('rate_delete/<int:pk>', views.RateDeleteView.as_view()),
-    path('rate_details/<int:pk>', views.RateDetailsView.as_view()),
+    path('rate/list/', views.RateListView.as_view(), name='rate_list'),
+    path('rate/create/', views.RateCreateView.as_view(), name='rate_create'),
+    path('rate/update/<int:pk>', views.RateUpdateView.as_view(), name='rate_update'),
+    path('rate/delete/<int:pk>', views.RateDeleteView.as_view(), name='rate_delete'),
+    path('rate/details/<int:pk>', views.RateDetailsView.as_view(), name='rate_details'),
 
-    path('contactus_list/', views.ContactUsListView.as_view()),
-    path('contactus_create/', views.ContactUsCreateView.as_view()),
-    path('contactus_update/<int:pk>', views.ContactUsUpdateView.as_view()),
-    path('contactus_delete/<int:pk>', views.ContactUsDeleteView.as_view()),
-    path('contactus_details/<int:pk>', views.ContactUsDetailsView.as_view()),
+    path('contactus/list/', views.ContactUsListView.as_view(), name='contactus_list'),
+    path('contactus/create/', views.ContactUsCreateView.as_view(), name='contactus_create'),
+    path('contactus/update/<int:pk>', views.ContactUsUpdateView.as_view(), name='contactus_update'),
+    path('contactus/delete/<int:pk>', views.ContactUsDeleteView.as_view(), name='contactus_delete'),
+    path('contactus/details/<int:pk>', views.ContactUsDetailsView.as_view(), name='contactus_details'),
 
     path('__debug__/', include('debug_toolbar.urls')),
 ]
