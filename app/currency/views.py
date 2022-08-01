@@ -6,7 +6,10 @@ from currency import utils
 from currency.forms import RateForm, ContactUsForm, SourceForm
 from django.views import generic
 
+from silk.profiling.profiler import silk_profile
 
+
+@silk_profile(name='View Index')
 class IndexView(generic.TemplateView):
     template_name = 'index.html'
 
@@ -48,6 +51,7 @@ def contactus_generator(request):
 
 
 # =================Source==================
+@silk_profile(name='View Source List')
 class SourceListView(generic.ListView):
     queryset = Source.objects.all()
     template_name = 'source_list.html'
@@ -58,6 +62,7 @@ class SourceListView(generic.ListView):
         return context
 
 
+@silk_profile(name='View Source Create')
 class SourceCreateView(generic.CreateView):
     queryset = Source.objects.all()
     template_name = 'source_create.html'
@@ -70,6 +75,7 @@ class SourceCreateView(generic.CreateView):
         return context
 
 
+@silk_profile(name='View Source Update')
 class SourceUpdateView(generic.UpdateView):
     queryset = Source.objects.all()
     template_name = 'source_update.html'
@@ -82,6 +88,7 @@ class SourceUpdateView(generic.UpdateView):
         return context
 
 
+@silk_profile(name='View Source Delete')
 class SourceDeleteView(generic.DeleteView):
     queryset = Source.objects.all()
     template_name = 'source_delete.html'
@@ -93,6 +100,7 @@ class SourceDeleteView(generic.DeleteView):
         return context
 
 
+@silk_profile(name='View Source Details')
 class SourceDetailsView(generic.DetailView):
     queryset = Source.objects.all()
     template_name = 'source_details.html'
@@ -104,6 +112,7 @@ class SourceDetailsView(generic.DetailView):
 
 
 # =================Rate===================
+@silk_profile(name='View Rate List')
 class RateListView(generic.ListView):
     queryset = Rate.objects.all()
     template_name = 'rate_list.html'
@@ -114,6 +123,7 @@ class RateListView(generic.ListView):
         return context
 
 
+@silk_profile(name='View Rate Create')
 class RateCreateView(generic.CreateView):
     queryset = Rate.objects.all()
     template_name = 'rate_create.html'
@@ -126,6 +136,7 @@ class RateCreateView(generic.CreateView):
         return context
 
 
+@silk_profile(name='View Rate Update')
 class RateUpdateView(generic.UpdateView):
     queryset = Rate.objects.all()
     template_name = 'rate_update.html'
@@ -138,6 +149,7 @@ class RateUpdateView(generic.UpdateView):
         return context
 
 
+@silk_profile(name='View Rate Delete')
 class RateDeleteView(generic.DeleteView):
     queryset = Rate.objects.all()
     template_name = 'rate_delete.html'
@@ -149,6 +161,7 @@ class RateDeleteView(generic.DeleteView):
         return context
 
 
+@silk_profile(name='View Rate Details')
 class RateDetailsView(generic.DetailView):
     queryset = Rate.objects.all()
     template_name = 'rate_details.html'
@@ -160,6 +173,7 @@ class RateDetailsView(generic.DetailView):
 
 
 # =================ContactUs===================
+@silk_profile(name='View ContactUs List')
 class ContactUsListView(generic.ListView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_list.html'
@@ -170,6 +184,7 @@ class ContactUsListView(generic.ListView):
         return context
 
 
+@silk_profile(name='View ContactUs Create')
 class ContactUsCreateView(generic.CreateView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_create.html'
@@ -182,6 +197,7 @@ class ContactUsCreateView(generic.CreateView):
         return context
 
 
+@silk_profile(name='View ContactUs Update')
 class ContactUsUpdateView(generic.UpdateView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_update.html'
@@ -194,6 +210,7 @@ class ContactUsUpdateView(generic.UpdateView):
         return context
 
 
+@silk_profile(name='View ContactUs Delete')
 class ContactUsDeleteView(generic.DeleteView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_delete.html'
@@ -205,6 +222,7 @@ class ContactUsDeleteView(generic.DeleteView):
         return context
 
 
+@silk_profile(name='View ContactUs Details')
 class ContactUsDetailsView(generic.DetailView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_details.html'

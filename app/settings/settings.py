@@ -140,6 +140,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 IMPORT_EXPORT_SKIP_ADMIN_LOG = True
 
+# django-silk
+SILKY_PYTHON_PROFILER = True
+
 # Debug Tool Bar
 if DEBUG:
     import socket  # only if you haven't already imported this
