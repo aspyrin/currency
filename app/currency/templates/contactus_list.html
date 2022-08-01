@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <a class="custom_button" href="/contactus_create/">Create ContactUs</a>
+    <a class="custom_button" href="{% url 'currency:contactus_create' %}">Create ContactUs</a>
     {% if contactus_list %}
         <table>
         <caption>
@@ -26,13 +26,13 @@
               <td style="text-align: center;">{{ contactus.message }}</td>
               <td style="text-align: center;">{{ contactus.sended|date:'Y-m-d H:i' }}</td>
               <td style="text-align: center;">
-                  <a href="/contactus_details/{{ contactus.id }}">Detail</a>
+                  <a href="{% url 'currency:contactus_details' pk=contactus.id %}">Detail</a>
               </td>
               <td style="text-align: center;">
-                  <a href="/contactus_update/{{ contactus.id }}">Edit</a>
+                  <a href="{% url 'currency:contactus_update' pk=contactus.id %}">Edit</a>
               </td>
               <td style="text-align: center;">
-                  <a href="/contactus_delete/{{ contactus.id }}">Delete</a>
+                  <a href="{% url 'currency:contactus_delete' pk=contactus.id %}">Delete</a>
               </td>
           </tr>
           {% endfor %}

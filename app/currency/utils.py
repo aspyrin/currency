@@ -1,5 +1,6 @@
 import random
 from currency.models import Rate, ContactUs
+import datetime
 
 
 def rates_gen():
@@ -13,27 +14,35 @@ def rates_gen():
     :return: none
     """
 
-    source = "privatbank"
     bc_type = "UAN"
     c_types = ["USD", "EUR", "GBP", "PLN", "FRF"]
+    sources = ["privatbank", "monobank", "oschadbank", "kreditdnepr", "NBU"]
     init_sale = {"USD": 36, "EUR": 37, "GBP": 39, "PLN": 6, "FRF": 5}
+
+    date_list = []
+    for i in range(10):
+        create_date = datetime.datetime.date(datetime.datetime.now() + datetime.timedelta(days=-i))
+        date_list.append(create_date)
 
     Rate.objects.all().delete()
 
-    for i in range(100):
-        random.shuffle(c_types)
-        cur_c_type = c_types[0]
-        init_sale_value = init_sale.get(str(cur_c_type))
-        cur_sale = init_sale_value + random.random()
-        cur_buy = cur_sale * (1 + random.random())
+    for date in date_list:
+        for c_type in c_types:
+            for source in sources:
+                cur_c_type = c_type
+                init_sale_value = init_sale.get(str(cur_c_type))
+                cur_sale = init_sale_value + random.random()
+                cur_buy = cur_sale - random.random()
 
-        rate_object = Rate()
-        rate_object.base_currency_type = bc_type
-        rate_object.currency_type = cur_c_type
-        rate_object.sale = cur_sale
-        rate_object.buy = cur_buy
-        rate_object.source = source
-        rate_object.save()
+                rate_object = Rate()
+                rate_object.base_currency_type = bc_type
+                rate_object.currency_type = cur_c_type
+                rate_object.sale = cur_sale
+                rate_object.buy = cur_buy
+                rate_object.source = source
+                rate_object.save()
+                rate_object.created = date
+                rate_object.save()
 
 
 def contactus_gen():
@@ -58,3 +67,23 @@ def contactus_gen():
                                  email_to=emails_list[0],
                                  subject=subject,
                                  message=message)
+
+
+def get_last_rate_date():
+    last_rate_date = Rate.objects.first().created
+    return last_rate_date
+
+
+def get_last_rate_list(last_rate_date: datetime):
+    last_rate_list = Rate.objects.filter(created=last_rate_date)
+    return last_rate_list
+
+
+def get_sources():
+    source_list = Rate.objects.values('source').distinct()
+    return source_list
+
+
+def get_currency_types():
+    currency_type_list = Rate.objects.values('currency_type').distinct()
+    return currency_type_list
