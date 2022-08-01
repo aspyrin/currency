@@ -14,3 +14,10 @@ branch HomeWork_Lesson_08
 
 branch HomeWork_Lesson_09
  - class based views. reverse
+
+branch HomeWork_Lesson_10
+ - add model choices (Rate), 
+ - add admin (Rate, Source, ContactUs), 
+ - add custom date filter, 
+ - add import/export, 
+ - add silk plugin
