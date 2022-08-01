@@ -9,10 +9,10 @@ from django.views import generic
 from silk.profiling.profiler import silk_profile
 
 
-@silk_profile(name='View Index')
 class IndexView(generic.TemplateView):
     template_name = 'index.html'
 
+    @silk_profile(name='IndexView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Currency Exchange Project - Home page'
@@ -24,6 +24,7 @@ class IndexView(generic.TemplateView):
         return context
 
 
+@silk_profile(name='rate_generator')
 def rate_generator(request):
     """
     function clear currency_rate table,
@@ -37,6 +38,7 @@ def rate_generator(request):
     return HttpResponseRedirect(reverse('currency:rate_list'))
 
 
+@silk_profile(name='contactus_generator')
 def contactus_generator(request):
     """
     function clear currency_contactus table,
@@ -51,60 +53,60 @@ def contactus_generator(request):
 
 
 # =================Source==================
-@silk_profile(name='View Source List')
 class SourceListView(generic.ListView):
     queryset = Source.objects.all()
     template_name = 'source_list.html'
 
+    @silk_profile(name='SourceListView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Source list'
         return context
 
 
-@silk_profile(name='View Source Create')
 class SourceCreateView(generic.CreateView):
     queryset = Source.objects.all()
     template_name = 'source_create.html'
     form_class = SourceForm
     success_url = reverse_lazy('currency:source_list')
 
+    @silk_profile(name='SourceCreateView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Source create'
         return context
 
 
-@silk_profile(name='View Source Update')
 class SourceUpdateView(generic.UpdateView):
     queryset = Source.objects.all()
     template_name = 'source_update.html'
     form_class = SourceForm
     success_url = reverse_lazy('currency:source_list')
 
+    @silk_profile(name='SourceUpdateView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Source update'
         return context
 
 
-@silk_profile(name='View Source Delete')
 class SourceDeleteView(generic.DeleteView):
     queryset = Source.objects.all()
     template_name = 'source_delete.html'
     success_url = reverse_lazy('currency:source_list')
 
+    @silk_profile(name='SourceDeleteView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Source delete'
         return context
 
 
-@silk_profile(name='View Source Details')
 class SourceDetailsView(generic.DetailView):
     queryset = Source.objects.all()
     template_name = 'source_details.html'
 
+    @silk_profile(name='SourceDetailsView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Source details'
@@ -112,60 +114,60 @@ class SourceDetailsView(generic.DetailView):
 
 
 # =================Rate===================
-@silk_profile(name='View Rate List')
 class RateListView(generic.ListView):
     queryset = Rate.objects.all()
     template_name = 'rate_list.html'
 
+    @silk_profile(name='RateListView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Rate list'
         return context
 
 
-@silk_profile(name='View Rate Create')
 class RateCreateView(generic.CreateView):
     queryset = Rate.objects.all()
     template_name = 'rate_create.html'
     form_class = RateForm
     success_url = reverse_lazy('currency:rate_list')
 
+    @silk_profile(name='RateCreateView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Rate create'
         return context
 
 
-@silk_profile(name='View Rate Update')
 class RateUpdateView(generic.UpdateView):
     queryset = Rate.objects.all()
     template_name = 'rate_update.html'
     form_class = RateForm
     success_url = reverse_lazy('currency:rate_list')
 
+    @silk_profile(name='RateUpdateView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Rate update'
         return context
 
 
-@silk_profile(name='View Rate Delete')
 class RateDeleteView(generic.DeleteView):
     queryset = Rate.objects.all()
     template_name = 'rate_delete.html'
     success_url = reverse_lazy('currency:rate_list')
 
+    @silk_profile(name='RateDeleteView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Rate delete'
         return context
 
 
-@silk_profile(name='View Rate Details')
 class RateDetailsView(generic.DetailView):
     queryset = Rate.objects.all()
     template_name = 'rate_details.html'
 
+    @silk_profile(name='RateDetailsView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Rate details'
@@ -173,60 +175,60 @@ class RateDetailsView(generic.DetailView):
 
 
 # =================ContactUs===================
-@silk_profile(name='View ContactUs List')
 class ContactUsListView(generic.ListView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_list.html'
 
+    @silk_profile(name='ContactUsListView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Contact Us list'
         return context
 
 
-@silk_profile(name='View ContactUs Create')
 class ContactUsCreateView(generic.CreateView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_create.html'
     form_class = ContactUsForm
     success_url = reverse_lazy('currency:contactus_list')
 
+    @silk_profile(name='ContactUsCreateView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Contact Us create'
         return context
 
 
-@silk_profile(name='View ContactUs Update')
 class ContactUsUpdateView(generic.UpdateView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_update.html'
     form_class = ContactUsForm
     success_url = reverse_lazy('currency:contactus_list')
 
+    @silk_profile(name='ContactUsUpdateView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Contact Us update'
         return context
 
 
-@silk_profile(name='View ContactUs Delete')
 class ContactUsDeleteView(generic.DeleteView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_delete.html'
     success_url = reverse_lazy('currency:contactus_list')
 
+    @silk_profile(name='ContactUsDeleteView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Contact Us delete'
         return context
 
 
-@silk_profile(name='View ContactUs Details')
 class ContactUsDetailsView(generic.DetailView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_details.html'
 
+    @silk_profile(name='ContactUsDetailsView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Contact Us details'
