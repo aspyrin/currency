@@ -6,6 +6,7 @@ django-import-export==2.8.0
 
 # dev
 django-debug-toolbar==3.5.0
+django-silk==5.0.1
 
 # flake8
 flake8==4.0.1
