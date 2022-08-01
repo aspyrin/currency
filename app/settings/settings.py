@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     # 3rd
     'django_extensions',
     'debug_toolbar',
+    'rangefilter',
+    'import_export',
 
     # user applications
     'currency',
@@ -131,6 +133,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# django-import-export=
+IMPORT_EXPORT_USE_TRANSACTIONS = True
+IMPORT_EXPORT_SKIP_ADMIN_LOG = True
 
 # Debug Tool Bar
 if DEBUG:
