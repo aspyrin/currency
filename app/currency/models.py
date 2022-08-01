@@ -1,4 +1,5 @@
 from django.db import models
+from currency.model_choices import CarrencyType
 
 
 class Source(models.Model):
@@ -7,8 +8,16 @@ class Source(models.Model):
 
 
 class Rate(models.Model):
-    base_currency_type = models.CharField(max_length=3)
-    currency_type = models.CharField(max_length=3)
+
+    # if field has choices, we can get choice value
+    # python: get_base_currency_type_display()
+    # template: get_base_currency_type_display
+    base_currency_type = models.CharField(
+        max_length=3,
+        choices=CarrencyType.choices,
+        default=CarrencyType.CURRENCY_TYPE_UAH
+    )
+    currency_type = models.CharField(max_length=3, choices=CarrencyType.choices)
     sale = models.DecimalField(max_digits=10, decimal_places=4)
     buy = models.DecimalField(max_digits=10, decimal_places=4)
     source = models.CharField(max_length=64)
