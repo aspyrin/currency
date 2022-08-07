@@ -14,10 +14,10 @@ def rates_gen():
     :return: none
     """
 
-    bc_type = "UAN"
-    c_types = ["USD", "EUR", "GBP", "PLN", "FRF"]
-    sources = ["privatbank", "monobank", "oschadbank", "kreditdnepr", "NBU"]
-    init_sale = {"USD": 36, "EUR": 37, "GBP": 39, "PLN": 6, "FRF": 5}
+    bc_type = "UAH"
+    c_types = ["USD", "EUR", "BTC"]
+    sources = ["privatbank", "monobank"]
+    init_sale = {"USD": 36, "EUR": 37, "BTC": 863932}
 
     date_list = []
     for i in range(10):

@@ -1,9 +1,12 @@
 Django==4.0.6
 django-extensions==3.2.0
 ipython
+django-admin-rangefilter==0.8.5
+django-import-export==2.8.0
 
 # dev
 django-debug-toolbar==3.5.0
+django-silk==5.0.1
 
 # flake8
 flake8==4.0.1
