@@ -12,6 +12,11 @@ from silk.profiling.profiler import silk_profile
 class IndexView(generic.TemplateView):
     template_name = 'index.html'
 
+    # input point for all queries
+    # def dispatch(self, request, *args, **kwargs):
+    #     response = super().dispatch(request, *args, **kwargs)
+    #     return response
+
     @silk_profile(name='IndexView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
