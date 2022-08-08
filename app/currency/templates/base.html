@@ -62,14 +62,11 @@
     <a class="custom_button" href="{% url 'currency:source_list' %}">source_list</a>
     {% endif %}
 
-    {% if request.path == '/currency/contactus/list/' %}
-    <a class="custom_button_selected" href="{% url 'currency:contactus_list' %}">contactus_list</a>
+    {% if request.path == '/currency/contactus/contactus_create/' %}
+    <a class="custom_button_selected" href="{% url 'currency:contactus_create' %}">Contact Us</a>
     {% else %}
-    <a class="custom_button" href="{% url 'currency:contactus_list' %}">contactus_list</a>
+    <a class="custom_button" href="{% url 'currency:contactus_create' %}">Contact Us</a>
     {% endif %}
-
-    <a class="custom_button" href="{% url 'currency:rate_generator' %}">rate_generator</a>
-    <a class="custom_button" href="{% url 'currency:contactus_generator' %}">contactus_generator</a>
 </div>
 {# NAVBAR #}
 

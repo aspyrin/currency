@@ -1,12 +1,14 @@
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from currency.models import Rate, ContactUs, Source
-from currency import utils
-
-from currency.forms import RateForm, ContactUsForm, SourceForm
 from django.views import generic
+from django.core.mail import send_mail
+from django.conf import settings
 
 from silk.profiling.profiler import silk_profile
+
+from currency.models import Rate, ContactUs, Source
+from currency import utils
+from currency.forms import RateForm, ContactUsForm, SourceForm
 
 
 class IndexView(generic.TemplateView):
@@ -180,22 +182,22 @@ class RateDetailsView(generic.DetailView):
 
 
 # =================ContactUs===================
-class ContactUsListView(generic.ListView):
-    queryset = ContactUs.objects.all()
-    template_name = 'contactus_list.html'
+# class ContactUsListView(generic.ListView):
+#     queryset = ContactUs.objects.all()
+#     template_name = 'contactus_list.html'
 
-    @silk_profile(name='ContactUsListView: get_context_data')
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Contact Us list'
-        return context
+    # @silk_profile(name='ContactUsListView: get_context_data')
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['title'] = 'Contact Us list'
+    #     return context
 
 
 class ContactUsCreateView(generic.CreateView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_create.html'
     form_class = ContactUsForm
-    success_url = reverse_lazy('currency:contactus_list')
+    success_url = reverse_lazy('currency:index')
 
     @silk_profile(name='ContactUsCreateView: get_context_data')
     def get_context_data(self, **kwargs):
@@ -203,38 +205,60 @@ class ContactUsCreateView(generic.CreateView):
         context['title'] = 'Contact Us create'
         return context
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        # form.cleaned_data
+        # self.object
 
-class ContactUsUpdateView(generic.UpdateView):
-    queryset = ContactUs.objects.all()
-    template_name = 'contactus_update.html'
-    form_class = ContactUsForm
-    success_url = reverse_lazy('currency:contactus_list')
+        subject = 'ContactUs From Currency Project'
+        body = f"""
+        Subject From Client: {self.object.subject}
+        Email: {self.object.email_from}
+        Wants to contact
+        """
 
-    @silk_profile(name='ContactUsUpdateView: get_context_data')
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Contact Us update'
-        return context
+        send_mail(
+            subject,
+            body,
+            settings.EMAIL_HOST_USER,
+            [settings.EMAIL_HOST_USER],
+            fail_silently=False,
+        )
 
-
-class ContactUsDeleteView(generic.DeleteView):
-    queryset = ContactUs.objects.all()
-    template_name = 'contactus_delete.html'
-    success_url = reverse_lazy('currency:contactus_list')
-
-    @silk_profile(name='ContactUsDeleteView: get_context_data')
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Contact Us delete'
-        return context
+        return response
 
 
-class ContactUsDetailsView(generic.DetailView):
-    queryset = ContactUs.objects.all()
-    template_name = 'contactus_details.html'
+# class ContactUsUpdateView(generic.UpdateView):
+#     queryset = ContactUs.objects.all()
+#     template_name = 'contactus_update.html'
+#     form_class = ContactUsForm
+#     success_url = reverse_lazy('currency:contactus_list')
 
-    @silk_profile(name='ContactUsDetailsView: get_context_data')
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Contact Us details'
-        return context
+    # @silk_profile(name='ContactUsUpdateView: get_context_data')
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['title'] = 'Contact Us update'
+    #     return context
+
+
+# class ContactUsDeleteView(generic.DeleteView):
+#     queryset = ContactUs.objects.all()
+#     template_name = 'contactus_delete.html'
+#     success_url = reverse_lazy('currency:contactus_list')
+
+    # @silk_profile(name='ContactUsDeleteView: get_context_data')
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['title'] = 'Contact Us delete'
+    #     return context
+
+
+# class ContactUsDetailsView(generic.DetailView):
+#     queryset = ContactUs.objects.all()
+#     template_name = 'contactus_details.html'
+
+    # @silk_profile(name='ContactUsDetailsView: get_context_data')
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['title'] = 'Contact Us details'
+    #     return context
