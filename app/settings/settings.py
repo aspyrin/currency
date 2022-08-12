@@ -51,9 +51,11 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # 3rd middlewares
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'silk.middleware.SilkyMiddleware',
 
+    # django middlewares
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,6 +63,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # user middlewares
+    'currency.middlewares.SimpleMiddleware',
 ]
 
 ROOT_URLCONF = 'settings.urls'
@@ -149,3 +154,21 @@ if DEBUG:
     import socket  # only if you haven't already imported this
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
     INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + ["127.0.0.1", "10.0.2.2"]
+
+# EMAIL SETTINGS
+
+# -----------email settings for gmail-------------------
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'xxxxxxxx@gmail.com'
+# EMAIL_HOST_PASSWORD = 'xxxxxxxxxxxxxx'
+
+# ---------email settings for console viewing-----------
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'testapp1111111@gmail.com'
+EMAIL_HOST_PASSWORD = 'qwerty123456qwerty'

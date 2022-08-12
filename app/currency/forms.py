@@ -19,7 +19,7 @@ class ContactUsForm(forms.ModelForm):
         model = ContactUs
         fields = (
             'email_from',
-            'email_to',
+            # 'email_to',
             'subject',
             'message',
         )

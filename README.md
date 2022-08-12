@@ -21,3 +21,8 @@ branch HomeWork_Lesson_10
  - add custom date filter, 
  - add import/export, 
  - add silk plugin
+
+branch HomeWork_Lesson_11
+ - add model ResponseLog, 
+ - add middleware to project (time statistics), 
+ - set ContactUs and send email to console

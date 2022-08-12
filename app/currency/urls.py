@@ -22,9 +22,9 @@ urlpatterns = [
     path('rate/delete/<int:pk>', views.RateDeleteView.as_view(), name='rate_delete'),
     path('rate/details/<int:pk>', views.RateDetailsView.as_view(), name='rate_details'),
 
-    path('contactus/list/', views.ContactUsListView.as_view(), name='contactus_list'),
+    # path('contactus/list/', views.ContactUsListView.as_view(), name='contactus_list'),
     path('contactus/create/', views.ContactUsCreateView.as_view(), name='contactus_create'),
-    path('contactus/update/<int:pk>', views.ContactUsUpdateView.as_view(), name='contactus_update'),
-    path('contactus/delete/<int:pk>', views.ContactUsDeleteView.as_view(), name='contactus_delete'),
-    path('contactus/details/<int:pk>', views.ContactUsDetailsView.as_view(), name='contactus_details'),
+    # path('contactus/update/<int:pk>', views.ContactUsUpdateView.as_view(), name='contactus_update'),
+    # path('contactus/delete/<int:pk>', views.ContactUsDeleteView.as_view(), name='contactus_delete'),
+    # path('contactus/details/<int:pk>', views.ContactUsDetailsView.as_view(), name='contactus_details'),
 ]
