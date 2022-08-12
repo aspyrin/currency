@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <a class="custom_button" href="{% url 'currency:rate_create' %}">Create Rate</a>
+    <div>
+        <a class="custom_button" href="{% url 'currency:rate_create' %}">Create Rate</a>
+        <a class="custom_button" href="{% url 'currency:rate_download' %}">Download To CSV</a>
+    </div>
     {% if rate_list %}
         <table>
         <caption>

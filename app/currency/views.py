@@ -1,4 +1,7 @@
-from django.http import HttpResponseRedirect
+import csv
+import io
+
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.core.mail import send_mail
@@ -9,6 +12,7 @@ from silk.profiling.profiler import silk_profile
 from currency.models import Rate, ContactUs, Source
 from currency import utils
 from currency.forms import RateForm, ContactUsForm, SourceForm
+# from currency.resources import RateResource
 
 
 class IndexView(generic.TemplateView):
@@ -179,6 +183,41 @@ class RateDetailsView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Rate details'
         return context
+
+
+class DownloadRateView(generic.View):
+    """
+    class for generating csv from Rate model
+    """
+
+    # def get(self, request):
+    #     """
+    #     function based on import/export lib
+    #     :param request:
+    #     :return: csv
+    #     """
+    #     csv_content = RateResource().export().csv
+    #     return HttpResponse(csv_content, content_type='text/csv')
+
+    def get(self, request):
+        """
+        function based on io lib
+        :param request:
+        :return: csv
+        """
+        csv_io = io.StringIO()
+        csv_writer = csv.writer(csv_io)
+        headers = ['id', 'buy', 'sale']
+        csv_writer.writerow(headers)
+        for rate in Rate.objects.all():
+            row = [
+                rate.id,
+                rate.buy,
+                rate.sale,
+            ]
+            csv_writer.writerow(row)
+        csv_io.seek(0)
+        return HttpResponse(csv_io.read(), content_type='text/csv')
 
 
 # =================ContactUs===================
