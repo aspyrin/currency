@@ -29,3 +29,9 @@ branch HomeWork_Lesson_11
 
 branch HomeWork_Lesson_12
  - add export csv
+
+branch HomeWork_Lesson_13
+ - add login, logout
+ - add change user profile
+ - add fogot password
+ - add restriction on editing and deleting Rate, only for superuser

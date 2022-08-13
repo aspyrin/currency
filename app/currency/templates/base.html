@@ -67,6 +67,16 @@
     {% else %}
     <a class="custom_button" href="{% url 'currency:contactus_create' %}">Contact Us</a>
     {% endif %}
+
+    {% if request.user.is_authenticated %}
+        <strong>{{ request.user.email }}</strong>
+        <a class="custom_button" href="{% url 'currency:my_profile' %}">My Profile</a>
+        <a class="custom_button" href="{% url 'logout' %}">LogOut</a>
+    {% else %}
+        <a class="custom_button" href="{% url 'login' %}">LogIn</a>
+        <a class="custom_button" href="#">SignUp</a>
+    {% endif %}
+
 </div>
 {# NAVBAR #}
 

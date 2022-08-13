@@ -13,6 +13,9 @@ from currency.models import Rate, ContactUs, Source
 from currency import utils
 from currency.forms import RateForm, ContactUsForm, SourceForm
 # from currency.resources import RateResource
+from django.contrib.sessions.models import Session
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import get_user_model
 
 
 class IndexView(generic.TemplateView):
@@ -125,7 +128,7 @@ class SourceDetailsView(generic.DetailView):
 
 
 # =================Rate===================
-class RateListView(generic.ListView):
+class RateListView(LoginRequiredMixin, generic.ListView):
     queryset = Rate.objects.all()
     template_name = 'rate_list.html'
 
@@ -301,3 +304,27 @@ class ContactUsCreateView(generic.CreateView):
     #     context = super().get_context_data(**kwargs)
     #     context['title'] = 'Contact Us details'
     #     return context
+
+
+# TODO move to accounts app
+class UserProfileView(LoginRequiredMixin, generic.UpdateView):
+    queryset = get_user_model().objects.all()
+    template_name = 'my_profile.html'
+    success_url = reverse_lazy('currency:index')
+    fields = (
+        'first_name',
+        'last_name',
+    )
+
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #     queryset = queryset.filter(id=self.queryset.user.id)
+    #     return queryset
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'User Profile'
+        return context
