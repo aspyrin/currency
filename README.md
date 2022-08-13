@@ -33,5 +33,5 @@ branch HomeWork_Lesson_12
 branch HomeWork_Lesson_13
  - add login, logout
  - add change user profile
- - add fogot password
+ - add change password, forgot password
  - add restriction on editing and deleting Rate, only for superuser
