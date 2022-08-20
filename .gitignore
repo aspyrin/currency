@@ -132,3 +132,4 @@ dmypy.json
 
 # migrations
 app/currency/migrations/
+app/accounts/migrations/
