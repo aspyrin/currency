@@ -85,7 +85,7 @@ class SignUpForm(forms.ModelForm):
 
         subject = 'Activate Your Account'
         body = f'''
-            Activation link: {settings.HTTP_SCHEMA}://{settings.DOMAIN}{reverse('accounts:user_activate', 
+            Activation link: {settings.HTTP_SCHEMA}://{settings.DOMAIN}{reverse('accounts:user_activate',
                                                                                 args=(self.instance.username, ))}
         '''
         send_mail(
