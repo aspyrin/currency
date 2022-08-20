@@ -35,3 +35,6 @@ branch HomeWork_Lesson_13
  - add change user profile
  - add change password, forgot password
  - add restriction on editing and deleting Rate, only for superuser
+
+branch HomeWork_Lesson_14
+ - create registration in new application accounts with confirmation by mail
