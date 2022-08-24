@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 # from django.contrib.sessions.models import Session
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 
 from silk.profiling.profiler import silk_profile
 
@@ -312,27 +312,3 @@ class ContactUsCreateView(generic.CreateView):
     #     context = super().get_context_data(**kwargs)
     #     context['title'] = 'Contact Us details'
     #     return context
-
-
-# TODO move to accounts app
-class UserProfileView(LoginRequiredMixin, generic.UpdateView):
-    queryset = get_user_model().objects.all()
-    template_name = 'my_profile.html'
-    success_url = reverse_lazy('currency:index')
-    fields = (
-        'first_name',
-        'last_name',
-    )
-
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-    #     queryset = queryset.filter(id=self.queryset.user.id)
-    #     return queryset
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'User Profile'
-        return context

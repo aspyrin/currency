@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     # user applications
     'currency',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -180,3 +181,9 @@ EMAIL_HOST_PASSWORD = 'qwerty123456qwerty'
 LOGIN_REDIRECT_URL = reverse_lazy('currency:index')
 LOGOUT_REDIRECT_URL = reverse_lazy('currency:index')
 LOGIN_URL = reverse_lazy('login')
+
+AUTH_USER_MODEL = 'accounts.User'
+
+# TODO move to env
+HTTP_SCHEMA = 'http'
+DOMAIN = 'localhost:8000'

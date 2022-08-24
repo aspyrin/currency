@@ -28,7 +28,4 @@ urlpatterns = [
     # path('contactus/update/<int:pk>', views.ContactUsUpdateView.as_view(), name='contactus_update'),
     # path('contactus/delete/<int:pk>', views.ContactUsDeleteView.as_view(), name='contactus_delete'),
     # path('contactus/details/<int:pk>', views.ContactUsDetailsView.as_view(), name='contactus_details'),
-
-    # path('my_profile/<int:pk>', views.UserProfileView.as_view(), name='my_profile'),
-    path('my_profile/', views.UserProfileView.as_view(), name='my_profile'),
 ]
