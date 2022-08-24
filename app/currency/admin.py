@@ -22,7 +22,7 @@ class RateAdmin(ImportExportModelAdmin):
     readonly_fields = (
         'id',
         'base_currency_type',
-        'source',
+        # 'source',
         'created',
     )
     search_fields = (
