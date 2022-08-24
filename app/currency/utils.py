@@ -1,5 +1,5 @@
 import random
-from currency.models import Rate, ContactUs
+from currency.models import Rate, ContactUs, Source
 import datetime
 
 
@@ -16,7 +16,8 @@ def rates_gen():
 
     bc_type = "UAH"
     c_types = ["USD", "EUR", "BTC"]
-    sources = ["privatbank", "monobank"]
+    # sources = ["privatbank", "monobank"]
+    sources = Source.objects.all()
     init_sale = {"USD": 36, "EUR": 37, "BTC": 863932}
 
     date_list = []
@@ -80,7 +81,7 @@ def get_last_rate_list(last_rate_date: datetime):
 
 
 def get_sources():
-    source_list = Rate.objects.values('source').distinct()
+    source_list = Source.objects.all()
     return source_list
 
 
