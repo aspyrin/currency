@@ -129,7 +129,7 @@ class SourceDetailsView(generic.DetailView):
 
 # =================Rate===================
 class RateListView(LoginRequiredMixin, generic.ListView):
-    queryset = Rate.objects.all()
+    queryset = Rate.objects.all().select_related('source')
     template_name = 'rate_list.html'
 
     @silk_profile(name='RateListView: get_context_data')

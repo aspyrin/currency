@@ -27,7 +27,7 @@
               <td style="text-align: center;">{{ rate.get_currency_type_display }}</td>
               <td style="text-align: right;">{{ rate.sale }}</td>
               <td style="text-align: right;">{{ rate.buy }}</td>
-              <td style="text-align: center;">{{ rate.source }}</td>
+              <td style="text-align: center;">{{ rate.source.name }}</td>
               <td style="text-align: center;">{{ rate.created|date:'Y-m-d H:i' }}</td>
               <td style="text-align: center;">
                   <a href="{% url 'currency:rate_details' pk=rate.id %}">Details</a>

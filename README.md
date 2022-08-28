@@ -38,3 +38,6 @@ branch HomeWork_Lesson_13
 
 branch HomeWork_Lesson_14
  - create registration in new application accounts with confirmation by mail
+
+branch HomeWork_Lesson_15
+ - add a relationship between Rate and Source models
