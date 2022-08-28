@@ -41,3 +41,6 @@ branch HomeWork_Lesson_14
 
 branch HomeWork_Lesson_15
  - add a relationship between Rate and Source models
+
+branch HomeWork_Lesson_16
+ - prepare Celery and Rabbitmq.
