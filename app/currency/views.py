@@ -4,18 +4,14 @@ import io
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views import generic
-from django.core.mail import send_mail
-from django.conf import settings
-# from django.contrib.sessions.models import Session
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-# from django.contrib.auth import get_user_model
 
 from silk.profiling.profiler import silk_profile
 
 from currency.models import Rate, ContactUs, Source
 from currency import utils
 from currency.forms import RateForm, ContactUsForm, SourceForm
-# from currency.resources import RateResource
+from currency.tasks import send_contact_us_email
 
 
 class IndexView(generic.TemplateView):
@@ -201,15 +197,6 @@ class DownloadRateView(generic.View):
     class for generating csv from Rate model
     """
 
-    # def get(self, request):
-    #     """
-    #     function based on import/export lib
-    #     :param request:
-    #     :return: csv
-    #     """
-    #     csv_content = RateResource().export().csv
-    #     return HttpResponse(csv_content, content_type='text/csv')
-
     def get(self, request):
         """
         function based on io lib
@@ -257,24 +244,8 @@ class ContactUsCreateView(generic.CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        # form.cleaned_data
-        # self.object
-
-        subject = 'ContactUs From Currency Project'
-        body = f"""
-        Subject From Client: {self.object.subject}
-        Email: {self.object.email_from}
-        Wants to contact
-        """
-
-        send_mail(
-            subject,
-            body,
-            settings.EMAIL_HOST_USER,
-            [settings.EMAIL_HOST_USER],
-            fail_silently=False,
-        )
-
+        # call celery task
+        send_contact_us_email.delay(self.object.subject, self.object.email_from)
         return response
 
 
