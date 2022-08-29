@@ -6,14 +6,13 @@ from time import sleep
 
 @shared_task
 def slow_func():
-    print('START')
+    # print('START')
     sleep(10)
-    print('END')
+    # print('END')
 
 
 @shared_task
 def send_contact_us_email(subject, email_from):
-    email_subject = 'ContactUs From Currency Project'
     body = f"""
     Subject From Client: {subject}
     Email: {email_from}
