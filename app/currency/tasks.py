@@ -9,11 +9,11 @@ from currency import consts
 from currency import model_choices as mch
 
 
-@shared_task
-def slow_func():
-    print('START')
-    sleep(3)
-    print('END')
+# @shared_task
+# def slow_func():
+#     print('START')
+#     sleep(3)
+#     print('END')
 
 
 @shared_task
