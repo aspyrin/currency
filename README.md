@@ -44,3 +44,10 @@ branch HomeWork_Lesson_15
 
 branch HomeWork_Lesson_16
  - prepare Celery and Rabbitmq.
+
+branch HomeWork_Lesson_17
+ - prepare Crontab based on Celerybeat.
+ - create parser for PrivatBank API
+ - create parser for MonoBank API
+ - create parser for http://vkurse.dp.ua/
+ - create parser for 3 other sites
