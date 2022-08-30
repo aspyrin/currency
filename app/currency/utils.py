@@ -1,6 +1,7 @@
 import random
 from currency.models import Rate, ContactUs, Source
 import datetime
+from decimal import Decimal
 
 
 def rates_gen():
@@ -71,20 +72,36 @@ def contactus_gen():
 
 
 def get_last_rate_date():
-    last_rate_date = Rate.objects.first().created
+    last_rate_date = Rate.objects.last().created
     return last_rate_date
 
 
-def get_last_rate_list(last_rate_date: datetime):
-    last_rate_list = Rate.objects.filter(created=last_rate_date)
+def get_last_rate_list() -> list:
+    unique_rows = Rate.objects.values('base_currency_type', 'currency_type', 'source_id').distinct()
+    last_rate_list = list()
+    for row in unique_rows:
+        try:
+            last_rate = Rate.objects.select_related('source').filter(
+                base_currency_type=row['base_currency_type'],
+                currency_type=row['currency_type'],
+                source_id=row['source_id'],
+            ).latest('created')
+            last_rate_list.append(last_rate)
+        except Rate.DoesNotExist:
+            last_rate = None
+    # last_rate_list.sort()
     return last_rate_list
 
 
-def get_sources():
-    source_list = Source.objects.all()
-    return source_list
-
-
 def get_currency_types():
-    currency_type_list = Rate.objects.values('currency_type').distinct()
+    currency_type_list = Rate.objects.values('base_currency_type', 'currency_type').distinct()
     return currency_type_list
+
+
+def to_decimal(value: str, precision: int = 4) -> Decimal:
+    """
+    :param value:
+    :param precision:
+    :return: raunded decimal result
+    """
+    return Decimal(round(Decimal(value), 4))
