@@ -188,6 +188,22 @@ CELERY_BEAT_SCHEDULE = {
     },
     'parse_monobank': {
         'task': 'currency.tasks.parse_monobank',
-        'schedule': crontab(minute='*/1'),
+        'schedule': crontab(minute='*/15'),
+    },
+    'parse_vkurse': {
+        'task': 'currency.tasks.parse_vkurse',
+        'schedule': crontab(minute='*/15'),
+    },
+    'parse_oschadbank': {
+        'task': 'currency.tasks.parse_oschadbank',
+        'schedule': crontab(minute='*/15'),
+    },
+    'parse_creditdnepr': {
+        'task': 'currency.tasks.parse_creditdnepr',
+        'schedule': crontab(minute='*/15'),
+    },
+    'parse_creditagricole': {
+        'task': 'currency.tasks.parse_creditagricole',
+        'schedule': crontab(minute='*/15'),
     },
 }
