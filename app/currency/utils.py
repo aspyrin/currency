@@ -105,3 +105,38 @@ def to_decimal(value: str, precision: int = 4) -> Decimal:
     :return: raunded decimal result
     """
     return Decimal(round(Decimal(value), 4))
+
+
+def check_and_create_rate(base_currency_type: str,
+                          currency_type: str,
+                          source: Source,
+                          sale: Decimal,
+                          buy: Decimal):
+    """
+
+    :param base_currency_type:
+    :param currency_type:
+    :param source:
+    :param sale:
+    :param buy:
+    :return:
+    """
+    try:
+        latest_rate = Rate.objects.filter(
+            base_currency_type=base_currency_type,
+            currency_type=currency_type,
+            source=source,
+        ).latest('created')
+    except Rate.DoesNotExist:
+        latest_rate = None
+
+    if latest_rate is None or \
+            latest_rate.sale != sale or \
+            latest_rate.buy != buy:
+        Rate.objects.create(
+            base_currency_type=base_currency_type,
+            currency_type=currency_type,
+            sale=sale,
+            buy=buy,
+            source=source,
+        )
