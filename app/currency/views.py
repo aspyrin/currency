@@ -25,10 +25,21 @@ class IndexView(generic.TemplateView):
     @silk_profile(name='IndexView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Currency Exchange Project - Home page'
+        context['title'] = 'Latest exchange rates'
         context['last_rate_date'] = utils.get_last_rate_date()
         context['currency_types_list'] = utils.get_currency_types()
-        context['last_rate_list'] = utils.get_last_rate_list()
+        sort_by_type = {
+            'sale_asc': 'Sort by Sale (ASC)',
+            'sale_desc': 'Sort by Sale (DESC)',
+            'buy_asc': 'Sort by Buy (ASC)',
+            'buy_desc': 'Sort by Buy (DESC)',
+        }
+        if self.request.META['QUERY_STRING']:
+            context['last_rate_list'] = utils.get_last_rate_list(self.request.GET['sort_params'])
+            context['sort_by'] = sort_by_type.get(self.request.GET['sort_params'])
+        else:
+            context['last_rate_list'] = utils.get_last_rate_list()
+            context['sort_by'] = sort_by_type.get('sale_asc')
         return context
 
 
@@ -62,7 +73,7 @@ def contactus_generator(request):
 
 # =================Source==================
 class SourceListView(generic.ListView):
-    queryset = Source.objects.all()
+    queryset = Source.objects.all().order_by('name')
     template_name = 'source_list.html'
 
     @silk_profile(name='SourceListView: get_context_data')
@@ -117,19 +128,19 @@ class SourceDetailsView(generic.DetailView):
     @silk_profile(name='SourceDetailsView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Source details'
+        context['title'] = f'Source details (Id={self.object.id})'
         return context
 
 
 # =================Rate===================
 class RateListView(LoginRequiredMixin, generic.ListView):
-    queryset = Rate.objects.all().select_related('source')
+    queryset = Rate.objects.all().select_related('source').order_by('-created')
     template_name = 'rate_list.html'
 
     @silk_profile(name='RateListView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Rate list'
+        context['title'] = 'Rates history'
         return context
 
 
@@ -186,7 +197,7 @@ class RateDetailsView(generic.DetailView):
     @silk_profile(name='RateDetailsView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Rate details'
+        context['title'] = f'Rate details (Id={self.object.id})'
         return context
 
 
@@ -237,7 +248,7 @@ class ContactUsCreateView(generic.CreateView):
     @silk_profile(name='ContactUsCreateView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Contact Us create'
+        context['title'] = 'Contact Us'
         return context
 
     def form_valid(self, form):
@@ -245,39 +256,3 @@ class ContactUsCreateView(generic.CreateView):
         # call celery task
         send_contact_us_email.delay(self.object.subject, self.object.email_from)
         return response
-
-
-# class ContactUsUpdateView(generic.UpdateView):
-#     queryset = ContactUs.objects.all()
-#     template_name = 'contactus_update.html'
-#     form_class = ContactUsForm
-#     success_url = reverse_lazy('currency:contactus_list')
-
-    # @silk_profile(name='ContactUsUpdateView: get_context_data')
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['title'] = 'Contact Us update'
-    #     return context
-
-
-# class ContactUsDeleteView(generic.DeleteView):
-#     queryset = ContactUs.objects.all()
-#     template_name = 'contactus_delete.html'
-#     success_url = reverse_lazy('currency:contactus_list')
-
-    # @silk_profile(name='ContactUsDeleteView: get_context_data')
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['title'] = 'Contact Us delete'
-    #     return context
-
-
-# class ContactUsDetailsView(generic.DetailView):
-#     queryset = ContactUs.objects.all()
-#     template_name = 'contactus_details.html'
-
-    # @silk_profile(name='ContactUsDetailsView: get_context_data')
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['title'] = 'Contact Us details'
-    #     return context
