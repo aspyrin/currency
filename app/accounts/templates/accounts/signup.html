@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
+{% load crispy_forms_filters %}
 
 {% block main_content %}
-    <strong>Sign Up</strong>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type=submit>Send</button>
-    </form>
-
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h4 class="display-5">Sign Up</h4>
+    </div>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <a href="{% url 'password_reset' %}">Forgot password?</a>
+                <br><br>
+                <button type=submit class="btn btn-success btn-block">Send</button>
+            </form>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
 {% endblock main_content %}

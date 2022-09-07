@@ -1,53 +1,61 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <div>
-        <a class="custom_button" href="{% url 'currency:rate_create' %}">Create Rate</a>
-        <a class="custom_button" href="{% url 'currency:rate_download' %}">Download To CSV</a>
-    </div>
+
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            {% if request.user.is_superuser %}
+            <a class="nav-link btn btn-outline-primary btn-sm" href="{% url 'currency:rate_create' %}">
+                Create Rate
+            </a>
+            {% endif %}
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline-primary btn-sm" href="{% url 'currency:rate_download' %}">
+                Download To CSV
+            </a>
+        </li>
+    </ul>
+
     {% if rate_list %}
-        <table>
-        <caption>
-            <strong>Список курсов валют (всего: {{ rate_list.count }} записей)</strong>
-        </caption>
-          <tr>
-              <th>Id</th>
-              <th>base_currency_type</th>
-              <th>currency_type</th>
-              <th>sale</th>
-              <th>buy</th>
-              <th>source</th>
-              <th>created</th>
-              <th colspan="3">actions</th>
-          </tr>
-          {% for rate in rate_list %}
-          <tr>
-              <td style="text-align: center;">{{ rate.id }}</td>
-              <td style="text-align: center;">{{ rate.get_base_currency_type_display }}</td>
-              <td style="text-align: center;">{{ rate.get_currency_type_display }}</td>
-              <td style="text-align: right;">{{ rate.sale }}</td>
-              <td style="text-align: right;">{{ rate.buy }}</td>
-              <td style="text-align: center;">{{ rate.source.name }}</td>
-              <td style="text-align: center;">{{ rate.created|date:'Y-m-d H:i' }}</td>
-              <td style="text-align: center;">
-                  <a href="{% url 'currency:rate_details' pk=rate.id %}">Details</a>
-              </td>
-              <td style="text-align: center;">
-                  {% if request.user.is_superuser %}
-                    <a href="{% url 'currency:rate_update' pk=rate.id %}">Edit</a>
-                  {% endif %}
-              </td>
-              <td style="text-align: center;">
-                  {% if request.user.is_superuser %}
-                    <a href="{% url 'currency:rate_delete' pk=rate.id %}">Delete</a>
-                  {% endif %}
-              </td>
-          </tr>
-          {% endfor %}
+        <strong>Total: {{ rate_list.count }}</strong>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Base Type</th>
+                    <th>Type</th>
+                    <th>Sale</th>
+                    <th>Buy</th>
+                    <th>Source</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rate in rate_list %}
+                <tr>
+                    <td>{{ rate.id }}</td>
+                    <td>{{ rate.get_base_currency_type_display }}</td>
+                    <td>{{ rate.get_currency_type_display }}</td>
+                    <td>{{ rate.sale }}</td>
+                    <td>{{ rate.buy }}</td>
+                    <td>{{ rate.source.name }}</td>
+                    <td>{{ rate.created|date:'Y-m-d H:i' }}</td>
+                    <td>
+                        <a href="{% url 'currency:rate_details' pk=rate.id %}">Details</a>
+                        {% if request.user.is_superuser %}
+                            <a href="{% url 'currency:rate_update' pk=rate.id %}">Edit</a>
+                            <a href="{% url 'currency:rate_delete' pk=rate.id %}">Delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
 
     {% else %}
-        <p>rate_list пуст, нет записей для вывода!</p>
+        <p>Rate list is empty!</p>
 
     {% endif %}
 {% endblock main_content %}
