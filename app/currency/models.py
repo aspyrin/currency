@@ -12,7 +12,8 @@ class ResponseLog(models.Model):
 
 class Source(models.Model):
     source_url = models.CharField(max_length=255)
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
+    code_name = models.CharField(max_length=16, unique=True)
 
     def __str__(self):
         return self.name

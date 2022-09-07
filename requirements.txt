@@ -4,6 +4,7 @@ ipython
 django-admin-rangefilter==0.8.5
 django-import-export==2.8.0
 Celery==5.2.7
+beautifulsoup4==4.11.1
 
 # dev
 django-debug-toolbar==3.5.0

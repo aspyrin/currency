@@ -26,11 +26,9 @@ class IndexView(generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Currency Exchange Project - Home page'
-        last_rate_date = utils.get_last_rate_date()
-        context['last_rate_date'] = last_rate_date
+        context['last_rate_date'] = utils.get_last_rate_date()
         context['currency_types_list'] = utils.get_currency_types()
-        context['sources_list'] = utils.get_sources()
-        context['last_rate_list'] = utils.get_last_rate_list(last_rate_date)
+        context['last_rate_list'] = utils.get_last_rate_list()
         return context
 
 
