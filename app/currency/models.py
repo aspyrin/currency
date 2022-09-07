@@ -10,10 +10,15 @@ class ResponseLog(models.Model):
     ip = models.CharField(max_length=20)
 
 
+def source_logo(instance, filename):
+    return 'source_logo/{0}/{1}'.format(instance.id, filename)
+
+
 class Source(models.Model):
     source_url = models.CharField(max_length=255)
     name = models.CharField(max_length=64, unique=True)
     code_name = models.CharField(max_length=16, unique=True)
+    logo = models.FileField(upload_to=source_logo)
 
     def __str__(self):
         return self.name
