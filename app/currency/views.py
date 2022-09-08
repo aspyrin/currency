@@ -34,7 +34,7 @@ class IndexView(generic.TemplateView):
             'buy_asc': 'Sort by Buy (ASC)',
             'buy_desc': 'Sort by Buy (DESC)',
         }
-        if self.request.META['QUERY_STRING']:
+        if self.request.GET:
             context['last_rate_list'] = utils.get_last_rate_list(self.request.GET['sort_params'])
             context['sort_by'] = sort_by_type.get(self.request.GET['sort_params'])
         else:
