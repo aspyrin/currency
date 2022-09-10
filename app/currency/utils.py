@@ -72,8 +72,14 @@ def contactus_gen():
 
 
 def get_last_rate_date():
-    last_rate_date = Rate.objects.last().created
-    return last_rate_date
+    if Rate.objects.all().count() > 0:
+        try:
+            last_rate_date = Rate.objects.last().created
+            return last_rate_date
+        except Rate.DoesNotExist:
+            return None
+    else:
+        return None
 
 
 def get_last_rate_list(sort_params: str = 'sale_asc') -> list:
@@ -104,8 +110,14 @@ def get_last_rate_list(sort_params: str = 'sale_asc') -> list:
 
 
 def get_currency_types():
-    currency_type_list = Rate.objects.values('base_currency_type', 'currency_type').distinct()
-    return currency_type_list
+    if Rate.objects.all().count() > 0:
+        try:
+            currency_type_list = Rate.objects.values('base_currency_type', 'currency_type').distinct()
+            return currency_type_list
+        except Rate.DoesNotExist:
+            return None
+    else:
+        None
 
 
 def to_decimal(value: str, precision: int = 4) -> Decimal:

@@ -2,48 +2,52 @@
 
 {% block main_content %}
     <div class="container-fluid mb-3 text-center">
-        {# sort choices #}
-        <div class="d-flex flex-column flex-md-row p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-            <div class="btn-group">
-                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-                    {{ sort_by }}
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'currency:index' %}?sort_params=sale_asc">Sort by Sale (ASC)"</a>
-                    <a class="dropdown-item" href="{% url 'currency:index' %}?sort_params=sale_desc">Sort by Sale (DESC)</a>
-                    <a class="dropdown-item" href="{% url 'currency:index' %}?sort_params=buy_asc">Sort by Buy (ASC)</a>
-                    <a class="dropdown-item" href="{% url 'currency:index' %}?sort_params=buy_desc">Sort by Buy (DESC)</a>
+        {% if currency_types_list %}
+            {# sort choices #}
+            <div class="d-flex flex-column flex-md-row p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+                        {{ sort_by }}
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'currency:index' %}?sort_params=sale_asc">Sort by Sale (ASC)"</a>
+                        <a class="dropdown-item" href="{% url 'currency:index' %}?sort_params=sale_desc">Sort by Sale (DESC)</a>
+                        <a class="dropdown-item" href="{% url 'currency:index' %}?sort_params=buy_asc">Sort by Buy (ASC)</a>
+                        <a class="dropdown-item" href="{% url 'currency:index' %}?sort_params=buy_desc">Sort by Buy (DESC)</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% for c_types in currency_types_list %}
-            <div class="card mb-4 shadow-sm">
-                <h3 class="text-center">
-                    1 {{ c_types.currency_type }} ({{ c_types.base_currency_type }})
-                </h3>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr class="text-center">
-                            <th>Source</th>
-                            <th>Sale</th>
-                            <th>Buy</th>
-                            <th>Created</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for rate in last_rate_list %}
-                            {% if rate.currency_type == c_types.currency_type and rate.base_currency_type == c_types.base_currency_type %}
-                                <tr class="text-center">
-                                    <td>{{ rate.source.name }}</td>
-                                    <td>{{ rate.sale }}</td>
-                                    <td>{{ rate.buy }}</td>
-                                    <td>{{ rate.created|date:'Y-m-d H:i' }}</td>
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div><br>
-        {% endfor %}
+            {% for c_types in currency_types_list %}
+                <div class="card mb-4 shadow-sm">
+                    <h3 class="text-center">
+                        1 {{ c_types.currency_type }} ({{ c_types.base_currency_type }})
+                    </h3>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Source</th>
+                                <th>Sale</th>
+                                <th>Buy</th>
+                                <th>Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for rate in last_rate_list %}
+                                {% if rate.currency_type == c_types.currency_type and rate.base_currency_type == c_types.base_currency_type %}
+                                    <tr class="text-center">
+                                        <td>{{ rate.source.name }}</td>
+                                        <td>{{ rate.sale }}</td>
+                                        <td>{{ rate.buy }}</td>
+                                        <td>{{ rate.created|date:'Y-m-d H:i' }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div><br>
+            {% endfor %}
+        {% else %}
+            <p>Sorry, Rate list is empty!</p>
+        {% endif %}
     </div>
  {% endblock main_content %}
