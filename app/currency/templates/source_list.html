@@ -1,38 +1,56 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <a class="custom_button" href="{% url 'currency:source_create' %}">Create Source</a>
+
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            {% if request.user.is_superuser %}
+            <a class="nav-link btn btn-outline-primary btn-sm" href="{% url 'currency:source_create' %}">
+                Create Source
+            </a>
+            {% endif %}
+        </li>
+    </ul>
+
     {% if source_list %}
-        <table>
-        <caption>
-            <strong>Список источников (всего: {{ source_list.count }} записей)</strong>
-        </caption>
-          <tr>
-              <th>Id</th>
-              <th>source_url</th>
-              <th>name</th>
-              <th colspan="3">actions</th>
-          </tr>
-          {% for source in source_list %}
-          <tr>
-              <td style="text-align: center;">{{ source.id }}</td>
-              <td style="text-align: center;">{{ source.source_url }}</td>
-              <td style="text-align: center;">{{ source.name }}</td>
-              <td style="text-align: center;">
-                  <a href="{% url 'currency:source_details' pk=source.id %}">Details</a>
-              </td>
-              <td style="text-align: center;">
-                  <a href="{% url 'currency:source_update' pk=source.id %}">Edit</a>
-              </td>
-              <td style="text-align: center;">
-                  <a href="{% url 'currency:source_delete' pk=source.id %}">Delete</a>
-              </td>
-          </tr>
-          {% endfor %}
+        <strong>Total: {{ source_list.count }}</strong>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Logo</th>
+                    <th>Name</th>
+                    <th>Source url</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for source in source_list %}
+                <tr>
+                    <td>{{ source.id }}</td>
+                    <td align="center">
+                            {% if source.logo %}
+                                <img src="{{ source.logo.url }}" height="25">
+                            {% endif %}
+                    </td>
+                    <td>{{ source.name }}</td>
+                    <td>
+                        <a href="{{ source.source_url }}" target="_blank">{{ source.source_url }}</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'currency:source_details' pk=source.id %}">Details</a>
+                        {% if request.user.is_superuser %}
+                            <a href="{% url 'currency:source_update' pk=source.id %}">Edit</a>
+                            <a href="{% url 'currency:source_delete' pk=source.id %}">Delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
 
     {% else %}
-        <p>source_list пуст, нет записей для вывода!</p>
+        <p>Source list is empty!</p>
 
     {% endif %}
 {% endblock main_content %}

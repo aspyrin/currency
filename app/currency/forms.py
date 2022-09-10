@@ -35,4 +35,9 @@ class SourceForm(forms.ModelForm):
         fields = (
             'source_url',
             'name',
+            'logo',
         )
+
+        widgets = {
+            'logo': forms.FileInput(attrs={'class': 'form-control-file border'})
+        }

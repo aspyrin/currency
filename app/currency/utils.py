@@ -76,7 +76,7 @@ def get_last_rate_date():
     return last_rate_date
 
 
-def get_last_rate_list() -> list:
+def get_last_rate_list(sort_params: str = 'sale_asc') -> list:
     unique_rows = Rate.objects.values('base_currency_type', 'currency_type', 'source_id').distinct()
     last_rate_list = list()
     for row in unique_rows:
@@ -89,7 +89,17 @@ def get_last_rate_list() -> list:
             last_rate_list.append(last_rate)
         except Rate.DoesNotExist:
             last_rate = None
-    # last_rate_list.sort()
+
+    # sort final object list
+    if sort_params == 'sale_asc':
+        last_rate_list.sort(key=lambda x: x.sale, reverse=False)
+    elif sort_params == 'sale_desc':
+        last_rate_list.sort(key=lambda x: x.sale, reverse=True)
+    elif sort_params == 'buy_asc':
+        last_rate_list.sort(key=lambda x: x.buy, reverse=False)
+    elif sort_params == 'buy_desc':
+        last_rate_list.sort(key=lambda x: x.buy, reverse=True)
+
     return last_rate_list
 
 

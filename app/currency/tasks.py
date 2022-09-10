@@ -9,6 +9,28 @@ from currency.utils import to_decimal, check_and_create_rate
 from currency import consts
 from currency import model_choices as mch
 
+# helpful console commands:
+
+# запустить celery worker с выводом лога в консоль
+# cd app && celery -A settings worker --loglevel=INFO
+
+# запустить celery beat с выводом лога в консоль
+# cd app && celery -A settings beat --loglevel=INFO
+
+# запустить celery worker с очисткой очереди заданий без блокирования окна консоли (detach)
+# cd app && celery -A settings worker --purge -D
+
+# запустить celery beat без блокирования окна консоли (detach)
+# cd app && celery -A settings beat --detach
+
+# Показать все планировщики celery
+# ps -ef | grep celery
+
+# Завершить все задачи и планирощик celery
+# pkill -9 -f tasks.updates.celery
+# или так
+# cd app && celery -A tasks.updates.celery control shutdown
+
 
 # @shared_task
 # def slow_func():
