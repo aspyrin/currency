@@ -51,3 +51,10 @@ branch HomeWork_Lesson_17
  - create parser for MonoBank API
  - create parser for http://vkurse.dp.ua/
  - create parser for 3 other sites
+
+branch HomeWork_Lesson_18
+ - add Bootstrap.
+ - add static and media
+ - add crispy forms
+ - add user avatar
+ - add source logo
