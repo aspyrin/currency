@@ -7,7 +7,6 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from silk.profiling.profiler import silk_profile
-from django.core.paginator import Paginator
 from django_filters.views import FilterView
 
 from currency.filters import RateFilter
