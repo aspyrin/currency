@@ -7,7 +7,10 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from silk.profiling.profiler import silk_profile
+from django.core.paginator import Paginator
+from django_filters.views import FilterView
 
+from currency.filters import RateFilter
 from currency.models import Rate, ContactUs, Source
 from currency import utils
 from currency.forms import RateForm, ContactUsForm, SourceForm
@@ -15,7 +18,7 @@ from currency.tasks import send_contact_us_email
 
 
 class IndexView(generic.TemplateView):
-    template_name = 'index.html'
+    template_name = 'currency/index.html'
 
     # input point for all queries
     # def dispatch(self, request, *args, **kwargs):
@@ -74,7 +77,7 @@ def contactus_generator(request):
 # =================Source==================
 class SourceListView(generic.ListView):
     queryset = Source.objects.all().order_by('name')
-    template_name = 'source_list.html'
+    template_name = 'currency/source_list.html'
 
     @silk_profile(name='SourceListView: get_context_data')
     def get_context_data(self, **kwargs):
@@ -85,7 +88,7 @@ class SourceListView(generic.ListView):
 
 class SourceCreateView(generic.CreateView):
     queryset = Source.objects.all()
-    template_name = 'source_create.html'
+    template_name = 'currency/source_create.html'
     form_class = SourceForm
     success_url = reverse_lazy('currency:source_list')
 
@@ -98,7 +101,7 @@ class SourceCreateView(generic.CreateView):
 
 class SourceUpdateView(generic.UpdateView):
     queryset = Source.objects.all()
-    template_name = 'source_update.html'
+    template_name = 'currency/source_update.html'
     form_class = SourceForm
     success_url = reverse_lazy('currency:source_list')
 
@@ -111,7 +114,7 @@ class SourceUpdateView(generic.UpdateView):
 
 class SourceDeleteView(generic.DeleteView):
     queryset = Source.objects.all()
-    template_name = 'source_delete.html'
+    template_name = 'currency/source_delete.html'
     success_url = reverse_lazy('currency:source_list')
 
     @silk_profile(name='SourceDeleteView: get_context_data')
@@ -123,7 +126,7 @@ class SourceDeleteView(generic.DeleteView):
 
 class SourceDetailsView(generic.DetailView):
     queryset = Source.objects.all()
-    template_name = 'source_details.html'
+    template_name = 'currency/source_details.html'
 
     @silk_profile(name='SourceDetailsView: get_context_data')
     def get_context_data(self, **kwargs):
@@ -133,20 +136,71 @@ class SourceDetailsView(generic.DetailView):
 
 
 # =================Rate===================
-class RateListView(LoginRequiredMixin, generic.ListView):
-    queryset = Rate.objects.all().select_related('source').order_by('-created')
-    template_name = 'rate_list.html'
+class RateListView(LoginRequiredMixin, FilterView):
+    queryset = Rate.objects.all().select_related('source')
+    filterset_class = RateFilter
+    template_name = 'currency/rate_list.html'
+    paginate_by = 10
+    ordering = '-created'
+    order_choices = {
+        'created': 'Created (ASC)',
+        '-created': 'Created (DESC)',
+        'sale': 'Sale (ASC)',
+        '-sale': 'Sale (DESC)',
+        'buy': 'Buy (ASC)',
+        '-buy': 'Buy (DESC)',
+    }
+
+    def get_ordering(self):
+        if 'sort_by' in self.request.GET:
+            ordering = self.request.GET['sort_by']
+        else:
+            ordering = self.ordering
+        return ordering
+
+    def get_paginate_by(self, queryset):
+        if 'page_size' in self.request.GET:
+            paginate_by = self.request.GET['page_size']
+        else:
+            paginate_by = self.paginate_by
+        return paginate_by
 
     @silk_profile(name='RateListView: get_context_data')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Rates history'
+
+        if self.request.GET.get('page'):
+            cur_page = int(self.request.GET['page'])
+        else:
+            cur_page = 1
+
+        context['pagination_get_visible_range'] = utils.pagination_get_visible_range(
+            self.queryset.count(),
+            self.paginate_by,
+            cur_page
+        )
+        context['page_size'] = self.get_paginate_by(self.queryset)
+        context['sort_by'] = self.get_ordering()
+        context['order_by_show'] = self.order_choices.get(self.get_ordering())
+
+        filter_params = self.request.GET.copy()
+        if self.page_kwarg in filter_params:
+            del filter_params[self.page_kwarg]
+            del filter_params['page_size']
+            del filter_params['sort_by']
+
+        context['filter_params'] = filter_params.urlencode()
+        context['filter_params_count'] = utils.filter_params_count(filter_params.dict())
+        context['filtered'] = self.object_list.count()
+        context['total'] = self.queryset.count()
+
         return context
 
 
 class RateCreateView(generic.CreateView):
     queryset = Rate.objects.all()
-    template_name = 'rate_create.html'
+    template_name = 'currency/rate_create.html'
     form_class = RateForm
     success_url = reverse_lazy('currency:rate_list')
 
@@ -159,7 +213,7 @@ class RateCreateView(generic.CreateView):
 
 class RateUpdateView(UserPassesTestMixin, generic.UpdateView):
     queryset = Rate.objects.all()
-    template_name = 'rate_update.html'
+    template_name = 'currency/rate_update.html'
     form_class = RateForm
     success_url = reverse_lazy('currency:rate_list')
 
@@ -176,7 +230,7 @@ class RateUpdateView(UserPassesTestMixin, generic.UpdateView):
 
 class RateDeleteView(UserPassesTestMixin, generic.DeleteView):
     queryset = Rate.objects.all()
-    template_name = 'rate_delete.html'
+    template_name = 'currency/rate_delete.html'
     success_url = reverse_lazy('currency:rate_list')
 
     def test_func(self):
@@ -192,7 +246,7 @@ class RateDeleteView(UserPassesTestMixin, generic.DeleteView):
 
 class RateDetailsView(generic.DetailView):
     queryset = Rate.objects.all()
-    template_name = 'rate_details.html'
+    template_name = 'currency/rate_details.html'
 
     @silk_profile(name='RateDetailsView: get_context_data')
     def get_context_data(self, **kwargs):
@@ -241,7 +295,7 @@ class DownloadRateView(generic.View):
 
 class ContactUsCreateView(generic.CreateView):
     queryset = ContactUs.objects.all()
-    template_name = 'contactus_create.html'
+    template_name = 'currency/contactus_create.html'
     form_class = ContactUsForm
     success_url = reverse_lazy('currency:index')
 
