@@ -30,12 +30,12 @@
                     Order by: <span class="badge badge-primary">{{ order_by_show }}</span>
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="?page={{ page_obj.number }}&page_size={{ page_size }}&{{ filter_params }}&sort_by=created">Created (ASC)</a>
-                    <a class="dropdown-item" href="?page={{ page_obj.number }}&page_size={{ page_size }}&{{ filter_params }}&sort_by=-created">Created (DESC)</a>
-                    <a class="dropdown-item" href="?page={{ page_obj.number }}&page_size={{ page_size }}&{{ filter_params }}&sort_by=sale">Sale (ASC)</a>
-                    <a class="dropdown-item" href="?page={{ page_obj.number }}&page_size={{ page_size }}&{{ filter_params }}&sort_by=-sale">Sale (DESC)</a>
-                    <a class="dropdown-item" href="?page={{ page_obj.number }}&page_size={{ page_size }}&{{ filter_params }}&sort_by=buy">Buy (ASC)</a>
-                    <a class="dropdown-item" href="?page={{ page_obj.number }}&page_size={{ page_size }}&{{ filter_params }}&sort_by=-buy">Buy (DESC)</a>
+                    {% for key, value in order_choices.items %}
+                        <a class="dropdown-item"
+                           href="?page={{ page_obj.number }}&page_size={{ page_size }}&{{ filter_params }}&sort_by={{ key }}">
+                            {{ value }}
+                        </a>
+                    {% endfor %}
                 </div>
             </div>
         </li>

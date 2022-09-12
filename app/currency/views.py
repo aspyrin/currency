@@ -183,6 +183,7 @@ class RateListView(LoginRequiredMixin, FilterView):
         context['page_size'] = self.get_paginate_by(self.queryset)
         context['sort_by'] = self.get_ordering()
         context['order_by_show'] = self.order_choices.get(self.get_ordering())
+        context['order_choices'] = self.order_choices
 
         filter_params = self.request.GET.copy()
         if self.page_kwarg in filter_params:
