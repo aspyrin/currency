@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'import_export',
     'silk',
     'crispy_forms',
+    'django_filters',
 
     # user applications
     'currency',
@@ -102,15 +103,15 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    # },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
@@ -192,26 +193,26 @@ CELERY_BROKER_URL = 'amqp://localhost'
 CELERY_BEAT_SCHEDULE = {
     'parse_privatbank': {
         'task': 'currency.tasks.parse_privatbank',
-        'schedule': crontab(minute='*/15'),
+        'schedule': crontab(minute='*/3'),
     },
     'parse_monobank': {
         'task': 'currency.tasks.parse_monobank',
-        'schedule': crontab(minute='*/15'),
+        'schedule': crontab(minute='*/3'),
     },
     'parse_vkurse': {
         'task': 'currency.tasks.parse_vkurse',
-        'schedule': crontab(minute='*/15'),
+        'schedule': crontab(minute='*/3'),
     },
     'parse_oschadbank': {
         'task': 'currency.tasks.parse_oschadbank',
-        'schedule': crontab(minute='*/15'),
+        'schedule': crontab(minute='*/3'),
     },
     'parse_creditdnepr': {
         'task': 'currency.tasks.parse_creditdnepr',
-        'schedule': crontab(minute='*/15'),
+        'schedule': crontab(minute='*/3'),
     },
     'parse_creditagricole': {
         'task': 'currency.tasks.parse_creditagricole',
-        'schedule': crontab(minute='*/15'),
+        'schedule': crontab(minute='*/3'),
     },
 }
