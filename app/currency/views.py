@@ -187,7 +187,11 @@ class RateListView(LoginRequiredMixin, FilterView):
         filter_params = self.request.GET.copy()
         if self.page_kwarg in filter_params:
             del filter_params[self.page_kwarg]
+
+        if 'page_size' in filter_params:
             del filter_params['page_size']
+
+        if 'sort_by' in filter_params:
             del filter_params['sort_by']
 
         context['filter_params'] = filter_params.urlencode()
