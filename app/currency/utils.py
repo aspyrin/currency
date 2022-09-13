@@ -191,7 +191,7 @@ def pagination_get_visible_range(records_count: int,
 def filter_params_count(filter_dict: dict) -> int:
     params_count = 0
     for value in filter_dict.values():
-        if value != '':
+        if value:
             params_count += 1
 
     return params_count
