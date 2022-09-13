@@ -58,3 +58,10 @@ branch HomeWork_Lesson_18
  - add crispy forms
  - add user avatar
  - add source logo
+
+branch HomeWork_Lesson_19
+ - add Pagination to rate_list
+ - add Page_size to rate_list
+ - add Django-Filter to rate_list
+ - add ordering to rate_list
+ - consolidate all this to GET query-string

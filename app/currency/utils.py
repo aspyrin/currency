@@ -1,3 +1,4 @@
+import math
 import random
 from currency.models import Rate, ContactUs, Source
 import datetime
@@ -162,3 +163,35 @@ def check_and_create_rate(base_currency_type: str,
             buy=buy,
             source=source,
         )
+
+
+def pagination_get_visible_range(records_count: int,
+                                 paginate_by: int,
+                                 cur_page: int = 1,
+                                 limit: int = 4) -> list:
+    pages_list: list = []
+    if records_count == 0 or paginate_by == 0:
+        return pages_list
+    else:
+        pages = int(math.ceil(records_count / paginate_by))
+
+        if cur_page > pages:
+            cur_page = pages
+
+        left_limit = cur_page - limit
+        right_limit = cur_page + limit
+
+        for page in range(pages):
+            if left_limit <= page + 1 <= right_limit:
+                pages_list.append(page + 1)
+
+    return pages_list
+
+
+def filter_params_count(filter_dict: dict) -> int:
+    params_count = 0
+    for value in filter_dict.values():
+        if value:
+            params_count += 1
+
+    return params_count
