@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_filters',
     'rest_framework',
-    
+
     # user applications
     'currency',
     'accounts',
