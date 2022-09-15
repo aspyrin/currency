@@ -5,6 +5,9 @@ manage_py := python app/manage.py
 run:
 	$(manage_py) runserver 0:8000
 
+show_urls:
+	$(manage_py) show_urls
+
 makemigrations:
 	$(manage_py) makemigrations
 
