@@ -65,3 +65,12 @@ branch HomeWork_Lesson_19
  - add Django-Filter to rate_list
  - add ordering to rate_list
  - consolidate all this to GET query-string
+
+branch HomeWork_Lesson_20
+ - add djangorestframework
+ - add to project new app 'api'
+ - create rest view for Rate model 
+   (generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView)
+ - create rest view for Source model (ListAPIView)
+ - create rest view for ContactUs model (ModelViewSet),
+   with overrides method Create and send mail (celery task)
