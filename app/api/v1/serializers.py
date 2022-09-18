@@ -34,5 +34,6 @@ class ContactUssSerializer(ModelSerializer):
             'id',
             'email_from',
             'subject',
+            'message',
             'sended',
         )
