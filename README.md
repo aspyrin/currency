@@ -74,3 +74,12 @@ branch HomeWork_Lesson_20
  - create rest view for Source model (ListAPIView)
  - create rest view for ContactUs model (ModelViewSet),
    with overrides method Create and send mail (celery task)
+
+branch HomeWork_Lesson_21
+ - add djangorestframework-simplejwt
+ - add docs drf-yasg
+ - add pagination
+ - add filters and ordering (Rate, Source, ContactUs)
+ - add version (v1) of Api application
+ - add throttling
+ - add Search filter to ContactUs
