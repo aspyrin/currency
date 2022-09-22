@@ -2,6 +2,7 @@ import csv
 import io
 
 from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -314,3 +315,45 @@ class ContactUsCreateView(generic.CreateView):
         # call celery task
         send_contact_us_email.delay(self.object.subject, self.object.email_from)
         return response
+
+
+class AjaxPartsPageView(generic.TemplateView):
+    template_name = 'currency/ajax_parts_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Ajax parts page'
+        # context['msg'] = 'test!!!'
+        return context
+
+
+def main_frame_content_get(request):
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            try:
+                queryset = Source.objects.all()
+                context = {
+                    'obj_list': queryset,
+                }
+                return render(request, 'parts/main_frame_content.html', context=context)
+
+            except Source.DoesNotExist:
+                pass
+
+
+def sub_frame_content_get(request):
+    queryset = None
+    context = {}
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            if request.GET['source_id']:
+                source_id = int(request.GET['source_id'])
+                try:
+                    queryset = Rate.objects.all().filter(source_id=source_id).select_related('source')
+                except Rate.DoesNotExist:
+                    queryset = None
+        context = {
+            'rate_list': queryset,
+        }
+
+    return render(request, 'parts/sub_frame_content.html', context=context)

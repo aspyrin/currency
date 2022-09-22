@@ -28,4 +28,10 @@ urlpatterns = [
     # path('contactus/update/<int:pk>', views.ContactUsUpdateView.as_view(), name='contactus_update'),
     # path('contactus/delete/<int:pk>', views.ContactUsDeleteView.as_view(), name='contactus_delete'),
     # path('contactus/details/<int:pk>', views.ContactUsDetailsView.as_view(), name='contactus_details'),
+
+    path('ajax/', views.AjaxPartsPageView.as_view(), name='ajax_parts_page_view'),
+    # path('ajax/ajax_get_value/', views.ajax_get_value, name='ajax_get_value'),
+    # path('ajax/ajax_get_table_1/', views.ajax_get_table_1, name='ajax_get_table_1'),
+    path('ajax/main_frame_content_get/', views.main_frame_content_get, name='main_frame_content_get'),
+    path('ajax/sub_frame_content_get/', views.sub_frame_content_get, name='sub_frame_content_get'),
 ]

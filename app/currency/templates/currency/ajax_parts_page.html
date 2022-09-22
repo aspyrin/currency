@@ -1,0 +1,47 @@
+{% extends 'currency/base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block main_content %}
+    <div class="row">
+        <div class="col-3">
+            <div class="container" id="left_side_bar_container">
+                {% include 'parts/sidebar_menue.html' %}
+            </div>
+        </div>
+        <div class="col">
+            {# MAIN FRAME AREA #}
+            <div class="row">
+                <div class="container" id="main_frame_container">
+                    {# ALERTS #}
+                    {% if msg %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ msg }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+
+                    {# MAIN FRAME CONTENT #}
+                    <div id="main_frame_content">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            {# SUB FRAME AREA #}
+            <div class="row">
+                <div class="container" id="sub_frame_container">
+                    {# SUB FRAME CONTENT #}
+                    <div id="sub_frame_content">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock main_content %}
+
+{% block add_script %}
+    <script src={% static "js/test_script.js" %}></script>
+{% endblock add_script %}
