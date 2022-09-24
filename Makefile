@@ -39,3 +39,7 @@ celery_beat_with_detach:
 # Завершить все задачи и планирощик celery
 celery_shutdown_all_active_tasks:
 	cd app && celery -A tasks.updates.celery control shutdown
+
+# Запустить тесты
+pytest:
+	pytest app/tests/
