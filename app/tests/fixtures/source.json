@@ -1,0 +1,62 @@
+[
+  {
+    "model": "currency.source",
+    "pk": 1,
+    "fields": {
+      "source_url": "https://api.monobank.ua/bank/currency",
+      "name": "MonoBank",
+      "code_name": "MonoBank",
+      "logo": ""
+    }
+  },
+  {
+    "model": "currency.source",
+    "pk": 2,
+    "fields": {
+      "source_url": "https://credit-agricole.ua/kurs-valyut",
+      "name": "CreditAgricole",
+      "code_name": "CreditAgricole",
+      "logo": ""
+    }
+  },
+  {
+    "model": "currency.source",
+    "pk": 3,
+    "fields": {
+      "source_url": "http://vkurse.dp.ua/course.json",
+      "name": "VKurse",
+      "code_name": "VKurse",
+      "logo": ""
+    }
+  },
+  {
+    "model": "currency.source",
+    "pk": 4,
+    "fields": {
+      "source_url": "https://creditdnepr.com.ua/currency",
+      "name": "CreditDnipro",
+      "code_name": "CreditDnepr",
+      "logo": ""
+    }
+  },
+  {
+    "model": "currency.source",
+    "pk": 5,
+    "fields": {
+      "source_url": "https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11",
+      "name": "PrivatBank",
+      "code_name": "PrivatBank",
+      "logo": ""
+    }
+  },
+  {
+    "model": "currency.source",
+    "pk": 6,
+    "fields": {
+      "source_url": "https://www.oschadbank.ua/currency-rate",
+      "name": "OschadBank",
+      "code_name": "OschadBank",
+      "logo": ""
+    }
+  }
+]

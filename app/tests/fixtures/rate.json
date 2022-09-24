@@ -1,0 +1,62 @@
+[
+  {
+    "model": "currency.rate",
+    "pk": 31,
+    "fields": {
+      "base_currency_type": "UAH",
+      "currency_type": "USD",
+      "sale": "41.8000",
+      "buy": "41.4000",
+      "source": 3,
+      "created": "2022-09-10T08:00:00.174Z"
+    }
+  },
+  {
+    "model": "currency.rate",
+    "pk": 32,
+    "fields": {
+      "base_currency_type": "UAH",
+      "currency_type": "EUR",
+      "sale": "41.1000",
+      "buy": "40.5000",
+      "source": 3,
+      "created": "2022-09-10T08:00:00.182Z"
+    }
+  },
+  {
+    "model": "currency.rate",
+    "pk": 33,
+    "fields": {
+      "base_currency_type": "UAH",
+      "currency_type": "USD",
+      "sale": "37.5000",
+      "buy": "36.5700",
+      "source": 4,
+      "created": "2022-09-10T08:00:00.257Z"
+    }
+  },
+  {
+    "model": "currency.rate",
+    "pk": 34,
+    "fields": {
+      "base_currency_type": "UAH",
+      "currency_type": "EUR",
+      "sale": "37.8000",
+      "buy": "36.6500",
+      "source": 4,
+      "created": "2022-09-10T08:00:00.262Z"
+    }
+  },
+  {
+    "model": "currency.rate",
+    "pk": 35,
+    "fields": {
+      "base_currency_type": "USD",
+      "currency_type": "EUR",
+      "sale": "1.0300",
+      "buy": "0.9900",
+      "source": 4,
+      "created": "2022-09-10T08:00:00.268Z"
+    }
+  }
+]
