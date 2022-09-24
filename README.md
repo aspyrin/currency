@@ -83,3 +83,11 @@ branch HomeWork_Lesson_21
  - add version (v1) of Api application
  - add throttling
  - add Search filter to ContactUs
+
+branch HomeWork_Lesson_22
+ - add pytest and pytest-django
+ - configuring pytest in project (pytest.ini, settings_test.py)
+ - add json files (fixtures) for load in DB in tests
+ - add conftest.py with fixtures (enable_db_access_for_all_tests, load_fixtures)
+ - add command to Makefile: make pytest 
+ - add tests (sanity.py, index.py, contactus.py, api.py: rate, contactus)
