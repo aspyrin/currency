@@ -48,15 +48,5 @@
       "code_name": "PrivatBank",
       "logo": ""
     }
-  },
-  {
-    "model": "currency.source",
-    "pk": 6,
-    "fields": {
-      "source_url": "https://www.oschadbank.ua/currency-rate",
-      "name": "OschadBank",
-      "code_name": "OschadBank",
-      "logo": ""
-    }
   }
 ]
