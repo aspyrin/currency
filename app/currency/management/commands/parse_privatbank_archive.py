@@ -3,7 +3,7 @@ from currency.models import Rate
 
 
 class Command(BaseCommand):
-    help = 'Get rate by rate_id and print to console'
+    # help = 'Get rate by rate_id and print to console'
 
     def add_arguments(self, parser):
         parser.add_argument('rate_ids', nargs='+', type=int)
