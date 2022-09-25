@@ -99,5 +99,5 @@ branch HomeWork_Lesson_23
  - add to makefile commands coverage, show-coverage
  - add .github/workflows/pytest.yml
  - add fixtures api_client, api_client_auth (with refactoring api tests)
- - add tests parse_monobank, parse_vkurse
+ - add tests for tasks with mocks: parse_privatbank, parse_monobank, parse_vkurse
  
