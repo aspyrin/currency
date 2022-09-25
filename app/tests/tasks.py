@@ -16,7 +16,7 @@ def test_parse_privatbank(mocker):
         response_json = json.loads(text_cleened)
 
     initial_rate_count = Rate.objects.count()
-    requests_get_mock = mocker.patch(
+    requests_get_mock = mocker.patch(   # noqa: F841
         'requests.get',
         return_value=MagicMock(json=lambda: response_json),
     )
@@ -35,7 +35,7 @@ def test_parse_monobank(mocker):
         response_json = json.loads(text_cleened)
 
     initial_rate_count = Rate.objects.count()
-    requests_get_mock = mocker.patch(
+    requests_get_mock = mocker.patch(   # noqa: F841
         'requests.get',
         return_value=MagicMock(json=lambda: response_json),
     )
@@ -54,7 +54,7 @@ def test_parse_vkurse(mocker):
         response_json = json.loads(text_cleened)
 
     initial_rate_count = Rate.objects.count()
-    requests_get_mock = mocker.patch(
+    requests_get_mock = mocker.patch(   # noqa: F841
         'requests.get',
         return_value=MagicMock(json=lambda: response_json),
     )
