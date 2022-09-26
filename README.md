@@ -91,3 +91,13 @@ branch HomeWork_Lesson_22
  - add conftest.py with fixtures (enable_db_access_for_all_tests, load_fixtures)
  - add command to Makefile: make pytest 
  - add tests (sanity.py, index.py, contactus.py, api.py: rate, contactus)
+
+branch HomeWork_Lesson_23
+ - add app/currency/management/commands/ (preparation for the archive parser task)
+ - add pytest, pytest-cov, pytest-mock
+ - apply coverage reporting to html
+ - add to makefile commands coverage, show-coverage
+ - add .github/workflows/pytest.yml
+ - add fixtures api_client, api_client_auth (with refactoring api tests)
+ - add tests for tasks with mocks: parse_privatbank, parse_monobank, parse_vkurse
+ 
