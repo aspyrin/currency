@@ -1,0 +1,35 @@
+[
+  {
+    "model": "currency.contactus",
+    "pk": 1,
+    "fields": {
+      "email_from": "aspyrin77@gmail.com",
+      "email_to": "",
+      "subject": "test",
+      "message": "test",
+      "sended": "2022-09-15T00:00:07.530Z"
+    }
+  },
+  {
+    "model": "currency.contactus",
+    "pk": 2,
+    "fields": {
+      "email_from": "aspyrin77@gmail.com",
+      "email_to": "",
+      "subject": "test2",
+      "message": "test2",
+      "sended": "2022-09-15T00:00:54.097Z"
+    }
+  },
+  {
+    "model": "currency.contactus",
+    "pk": 3,
+    "fields": {
+      "email_from": "aspyrin77@gmail.com",
+      "email_to": "",
+      "subject": "test3",
+      "message": "test3",
+      "sended": "2022-09-15T00:01:12.798Z"
+    }
+  }
+]

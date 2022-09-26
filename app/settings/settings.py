@@ -231,8 +231,9 @@ REST_FRAMEWORK = {
     #     'rest_framework.permissions.IsAuthenticated',
     # ),
     'DEFAULT_THROTTLE_RATES': {
-        'currency': '2/min',
+        'currency': '20/min',
     },
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
 
 SIMPLE_JWT = {
