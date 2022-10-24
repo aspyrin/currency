@@ -143,16 +143,16 @@ class Command(BaseCommand):
                                                        source,
                                                        sale,
                                                        buy):
-                            self.add_line_to_log(f'Add rate to DB! \n')
+                            self.add_line_to_log('Add rate to DB! \n')
                         else:
-                            self.add_line_to_log(f'There is already a rate in the db for this date.\n')
+                            self.add_line_to_log('There is already a rate in the db for this date.\n')
                 else:
                     if response_data_attempt <= self.response_data_retries:
                         self.add_line_to_log(f'This date has no rates!!! Attempt:{response_data_attempt}.\n')
                         response_data_attempt += 1
                     else:
                         response_data_condition = False
-                        self.add_line_to_log(f'Looks like it is the end, Baby!!! Exit!!!\n')
+                        self.add_line_to_log('Looks like it is the end, Baby!!! Exit!!!\n')
                 # ===============================================
 
                 delta_days += 1
