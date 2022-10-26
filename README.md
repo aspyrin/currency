@@ -104,4 +104,8 @@ branch HomeWork_Lesson_23
 branch HomeWork_ParseArchive
  - add app/currency/management/commands/parse_privatbank_archive.py
  - add function check_exist_and_create_rate to app/currency/utils.py
-   
+
+branch HomeWork_GunicornNginx
+ - add gunicorn
+ - add nginx
+ - add uwsga
