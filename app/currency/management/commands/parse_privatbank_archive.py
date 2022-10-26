@@ -1,3 +1,4 @@
+import os
 import datetime
 import time
 import requests
@@ -15,8 +16,10 @@ class Command(BaseCommand):
 
     # ===========PARSER SETTINGS=================
 
-    # path and name log file
-    log_file_name = 'app/currency/management/commands/parse_privatbank_archive_log.txt'
+    # path log file
+    log_path = "app/currency/management/commands/"
+    # name log file
+    log_file_name = os.path.join(log_path, "parse_privatbank_archive_log.txt")
 
     # begin from date, comment/uncomment what do you need
     # start_date = datetime.date(2014, 7, 22)
@@ -45,9 +48,11 @@ class Command(BaseCommand):
         :param out_to_terminal: show message to terminal (by default = False)
         :return:
         """
-        f = open(self.log_file_name, write_mode)
-        f.write(f"{datetime.datetime.utcnow()} - {line_text}\n")
-        f.close()
+
+        with open(self.log_file_name, write_mode) as file:
+            file.write(f"{datetime.datetime.utcnow()} - {line_text}\n")
+            file.close()
+
         if out_to_terminal:
             self.stdout.write(line_text)
 
