@@ -49,3 +49,32 @@ coverage:
 
 show-coverage:
 	python3 -c "import webbrowser; webbrowser.open('.pytest_cache/coverage/index.html')"
+
+# Запуск gunicorn
+gunicorn:
+	cd app && gunicorn settings.wsgi:application \
+						--bind 0.0.0.0:8002 \
+						--workers 8 \
+						--threads 2 \
+						--log-level debug \
+						--max-requests 1000 \
+						--timeout 10
+
+# Запуск uwsgi
+uwsgi:
+	cd app && uwsgi --module=settings.wsgi:application \
+					--master \
+					--http=0.0.0.0:8002 \
+					--workers 8 \
+					--enable-threads \
+					--threads 2 \
+					--harakiri=10 \
+					--max-requests=1000 \
+					--log-format="[%(ftime)] uWSGI worker: %(wid) (pid: %(pid)) for request: %(method) %(uri) %(proto) response: %(status) (%(msecs) msec)"
+
+# NGINX
+nginx_show_access_logs:
+	sudo tail /var/log/nginx/access.log -n 200
+
+nginx_show_error_logs:
+	sudo tail /var/log/nginx/error.log -n 200
