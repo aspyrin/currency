@@ -207,7 +207,7 @@ def check_exist_and_create_rate(check_date: datetime,
         tz = timezone.get_default_timezone()
         date_formatted = datetime.datetime(check_date.year, check_date.month, check_date.day, 00, 00, 00, 000, tz)
         new_rate.created = date_formatted
-        new_rate.save()
+        new_rate.save(update_fields=['created'])
         return True
 
     else:
