@@ -38,7 +38,7 @@ class Command(BaseCommand):
     delay_sec = 3
 
     # maximum number of parser iterations (useful when testing)
-    max_parser_iterations = 10000
+    max_parser_iterations = 5
 
     def add_line_to_log(self, line_text: str, write_mode: str = "a", out_to_terminal: bool = False):
         """
@@ -60,7 +60,8 @@ class Command(BaseCommand):
 
         # get or create Source
         source_name = 'PrivatBank'
-        source_url = 'https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11'
+        payload = {'exchange': '', 'json': '', 'coursid': '11'}
+        source_url = requests.get('https://api.privatbank.ua/p24api/pubinfo', params=payload)
         source, created = Source.objects.get_or_create(code_name=consts.CODE_NAME_PRIVATBANK,
                                                        defaults={
                                                            'source_url': source_url,
