@@ -2,6 +2,7 @@ import math
 import random
 from currency.models import Rate, ContactUs, Source
 import datetime
+from django.utils import timezone
 from decimal import Decimal
 
 
@@ -163,6 +164,54 @@ def check_and_create_rate(base_currency_type: str,
             buy=buy,
             source=source,
         )
+
+
+def check_exist_and_create_rate(check_date: datetime,
+                                base_currency_type: str,
+                                currency_type: str,
+                                source: Source,
+                                sale: Decimal,
+                                buy: Decimal,
+                                ) -> bool:
+    """
+    :param check_date:
+    :param base_currency_type:
+    :param currency_type:
+    :param source:
+    :param sale:
+    :param buy:
+    :return: if Create - True, if not create - False
+    """
+
+    try:
+        checked_rate = Rate.objects.filter(
+            base_currency_type=base_currency_type,
+            currency_type=currency_type,
+            source=source,
+            created__year=str(check_date.year),
+            created__month=str(check_date.month),
+            created__day=str(check_date.day),
+        )
+    except Rate.DoesNotExist:
+        checked_rate = None
+
+    if not checked_rate:
+        new_rate = Rate(
+            base_currency_type=base_currency_type,
+            currency_type=currency_type,
+            sale=sale,
+            buy=buy,
+            source=source,
+        )
+        new_rate.save()
+        tz = timezone.get_default_timezone()
+        date_formatted = datetime.datetime(check_date.year, check_date.month, check_date.day, 00, 00, 00, 000, tz)
+        new_rate.created = date_formatted
+        new_rate.save(update_fields=['created'])
+        return True
+
+    else:
+        return False
 
 
 def pagination_get_visible_range(records_count: int,

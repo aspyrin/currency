@@ -20,4 +20,4 @@ jobs:
         pip install -r requirements.txt
     - name: Analysing the code with pytest
       run: |
-        pytest --cov=app app/tests/ --cov-report html && coverage report --fail-under=64.0000
+        pytest --cov=app app/tests/ --cov-report html && coverage report --fail-under=50.0000

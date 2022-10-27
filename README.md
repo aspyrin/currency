@@ -100,4 +100,8 @@ branch HomeWork_Lesson_23
  - add .github/workflows/pytest.yml
  - add fixtures api_client, api_client_auth (with refactoring api tests)
  - add tests for tasks with mocks: parse_privatbank, parse_monobank, parse_vkurse
- 
+
+branch HomeWork_ParseArchive
+ - add app/currency/management/commands/parse_privatbank_archive.py
+ - add function check_exist_and_create_rate to app/currency/utils.py
+   
