@@ -38,7 +38,7 @@ class Command(BaseCommand):
     delay_sec = 3
 
     # maximum number of parser iterations (useful when testing)
-    max_parser_iterations = 5
+    max_parser_iterations = 10000
 
     def add_line_to_log(self, line_text: str, write_mode: str = "a", out_to_terminal: bool = False):
         """
