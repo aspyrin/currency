@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
 
 from silk.profiling.profiler import silk_profile
 from django_filters.views import FilterView
@@ -16,6 +18,7 @@ from currency.forms import RateForm, ContactUsForm, SourceForm
 from currency.tasks import send_contact_us_email
 
 
+@method_decorator(cache_page(10), name='dispatch')
 class IndexView(generic.TemplateView):
     template_name = 'currency/index.html'
 
