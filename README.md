@@ -109,3 +109,9 @@ branch HomeWork_GunicornNginx
  - add gunicorn
  - add nginx
  - add uwsga
+
+branch HomeWork_Lesson_27 (Memcached)
+ - add memcached
+ - add pymemcache
+ - add default settings to settings.py (BACKEND, LOCATION)
+ - add @method_decorator(cache_page) to IndexPage
