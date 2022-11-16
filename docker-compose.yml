@@ -60,6 +60,15 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
+  pgadmin:
+      image: dpage/pgadmin4
+      container_name: pgadmin
+      restart: always
+      ports:
+        - "5050:80"
+      env_file:
+        - .env
+
   nginx:
     image: nginx:latest
     container_name: nginx
