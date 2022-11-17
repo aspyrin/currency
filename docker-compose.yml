@@ -50,6 +50,18 @@ services:
       - "5672:5672"
       - "15672:15672"
 
+  flower:
+    image: local:0.0.1
+    build: .
+    container_name: flower
+    stdin_open: true
+    tty: true
+    ports:
+      - "5566:5566"
+    env_file:
+      - .env
+    command: celery -A settings flower --address=0.0.0.0 --port=5566
+
   postgres:
     image: postgres:14.6-alpine
     container_name: postgres

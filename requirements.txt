@@ -14,6 +14,7 @@ gunicorn==20.1.0
 uwsgi==2.0.21
 pymemcache==4.0.0
 psycopg2-binary==2.9.5
+flower==1.2.0
 
 # dev
 django-debug-toolbar==3.5.0
