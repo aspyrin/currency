@@ -115,3 +115,24 @@ branch HomeWork_Lesson_27 (Memcached)
  - add pymemcache
  - add default settings to settings.py (BACKEND, LOCATION)
  - add @method_decorator(cache_page) to IndexPage
+
+branch Docker_Compose
+ - add docker
+ - add docker-compose.yml with services: 
+   - backend,
+   - memcached, 
+   - rabbitmq, 
+   - postgres,
+   - celery,
+   - celerybeat,
+   - nginx,
+   - flower,
+   - pgadmin
+ - add Dockerfile (backend image)
+ - add .env and .env.example
+ - change settings.py (switch to environment variables)
+ - run nginx and gunicorn (default.conf, Dockerfile)
+ - add docker-compose.dev.yml with start backend on runserver command
+ - modified Makefile with docker commands
+ - add .dockerignore
+ - add docker volumes (backend, postgres, pgadmin)
